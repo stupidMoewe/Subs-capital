@@ -1,0 +1,56 @@
+.button-default {
+	display: inline-block;
+	color: black;
+	text-decoration: transparent;
+	border: #333 solid 2.5px;
+	border-radius: 6px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	/* max-width: 25rem; */
+	padding: 1.5rem;
+	cursor: pointer;
+	transition: all 0.3s;
+	border: 2px solid black;
+	margin: 0;
+	height: 100%;
+}
+
+.button-default:hover {
+	transition: all 0.5s;
+}
+
+/* BLUE */
+.blue:hover {
+	background-color: var(--blue);
+	color: var(--background-color) !important;
+}
+
+.blue:active {
+	transition: all 0.2s;
+	background-color: var(--blue);
+	color: var(--background-color) !important;
+	transform: scale(1.02);
+}
+
+/* INFO */
+.info:hover {
+	background-color: var(--info);
+	color: var(--background-color) !important;
+}
+
+/* INDIGO */
+
+.indigo {
+	border-color: var(--indigo);
+}
+.indigo:hover {
+	background-color: var(--indigo-hover);
+	border-color: var(--indigo-hover);
+	color: var(--background-color) !important;
+}
+.indigo:active {
+	background-color: var(--indigo-pressed);
+	border-color: var(--indigo-pressed);
+	color: var(--background-color) !important;
+}

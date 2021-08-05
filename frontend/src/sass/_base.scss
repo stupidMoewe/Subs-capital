@@ -1,0 +1,64 @@
+
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Signika&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Open Sans", "Montserrat", "Nunito", "Signika", "Muli",
+        sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #111;
+    min-height: 100vh;
+
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 400;
+    color: var(--font-color-4);
+}
+
+:root {
+    --background-color: rgb(249, 249, 252);
+    --theme-color-1: rgb(0, 0, 201);
+    --theme-color-2: rgb(208, 7, 208);
+
+    --font-color-1: #02203c;
+    --font-color-2: #445d6e;
+    --font-color-3: #f4f4f4;
+    --font-color-4: #00316c;
+
+    --blue: #007bff;
+    --blue-hover: #0f80f9;
+    --blue-pressed: #3193fc;
+    --indigo: #6f19fa;
+    --indigo-hover: #823cf4;
+    --indigo-pressed: #995ef7;
+
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+}

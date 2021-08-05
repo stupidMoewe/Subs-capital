@@ -1,0 +1,66 @@
+.button2.blue {
+	color: white;
+	text-decoration: none;
+	border: 2px solid var(--blue);
+	background-color: var(--blue);
+	border-radius: 500px;
+	font-size: 1.6rem;
+	padding: 14px 32px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+.button2.blue:hover {
+	border: 2px solid var(--blue-hover);
+	background-color: var(--blue-hover);
+	transform: scale(1.04);
+}
+.button2.blue:active {
+	border: 2px solid var(--blue-pressed);
+	background-color: var(--blue-pressed);
+}
+
+.button2.indigo {
+	color: white;
+	text-decoration: none;
+	border: 1px solid var(--indigo);
+	background-color: var(--indigo);
+	border-radius: 500px;
+	font-size: 1.6rem;
+	/* font-weight: bold; */
+	padding: 14px 32px;
+	cursor: pointer;
+	transition: all 0.1s;
+}
+.button2.indigo:hover {
+	border: 2px solid var(--indigo-hover);
+	background-color: var(--indigo-hover);
+	transform: scale(1.04);
+}
+.button2.indigo:active {
+	border: 2px solid var(--indigo-pressed);
+	background-color: var(--indigo-pressed);
+	transform: scale(1.04);
+}
+
+.button2.transparent {
+	color: var(--font-color-1);
+	text-decoration: none;
+	border: 2px solid var(--font-color-1);
+	background-color: transparent;
+	border-radius: 500px;
+	font-size: 1.6rem;
+	/* font-weight: bold; */
+	padding: 14px 32px;
+	cursor: pointer;
+	transition: all 0.1s;
+}
+.button2.transparent:hover {
+	border: 2px solid var(--font-color-1);
+	background-color: transparent;
+	transform: scale(1.04);
+}
+.button2.transparent:active {
+	border: 2px solid var(--font-color-1);
+	background-color: transparent;
+	transform: scale(1.04);
+}

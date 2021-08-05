@@ -1,0 +1,8 @@
+{
+	"short_name": "Subs",
+	"name": "Subs: investissez dans les crytpo-actifs",
+	"start_url": "./subs-frontend/sub",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+}
