@@ -46,12 +46,12 @@ app.use((req, res, next) => {
 	throw error;
 });
 
-app.use((error, req, res, next) => {
-	// res.locals.error = err;
-	const status = 500;
-	res.status(status);
-	res.render("error");
-});
+// app.use((error, req, res, next) => {
+// 	// res.locals.error = err;
+// 	const status = 500;
+// 	res.status(status);
+// 	res.render("error");
+// });
 
 // app.get("/", function (req, res) {
 // 	res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
