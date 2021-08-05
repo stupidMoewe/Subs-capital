@@ -47,11 +47,10 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-	if (res.headerSent) {
-		return next(error);
-	}
-	res.status(error.code || 500);
-	res.json({ message: error.message || "An unknown error occurred!" });
+	res.locals.error = err;
+	const status = err.status || 500;
+	res.status(status);
+	res.render("error");
 });
 
 // app.get("/", function (req, res) {
