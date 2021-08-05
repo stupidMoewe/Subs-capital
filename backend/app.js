@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-	res.locals.error = err;
+	// res.locals.error = err;
 	const status = 500;
 	res.status(status);
 	res.render("error");
