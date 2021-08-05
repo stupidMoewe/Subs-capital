@@ -31,6 +31,9 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("/*", function (req, res) {
+	res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
 
 // app.use(cors());
 
@@ -52,12 +55,22 @@ app.use((error, req, res, next) => {
 });
 
 // app.get("/", function (req, res) {
-// 	res.sendFile(path.join(__dirname, "build", "index.html"));
+// 	res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 // });
 
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname + "../frontend/build/index.html"));
-});
+// app.get("/", (req, res) => {
+// 	console.log(__dirname);
+// 	res.sendFile(path.join(__dirname + "../frontend/build/index.html"));
+// });
+// app.use(
+// 	"/static",
+// 	express.static(path.join(__dirname, "../frontend/build/static"))
+// );
+// app.get("*", function (req, res) {
+// 	res.sendFile("index.html", {
+// 		root: path.join(__dirname, "../frontend/build/"),
+// 	});
+// });
 mongoose
 	.connect(
 		`mongodb+srv://subs-db-admin:Subsrelou1!@cluster0.ntrog.mongodb.net/articles?retryWrites=true&w=majority`,
@@ -68,6 +81,7 @@ mongoose
 	)
 	.then(() => {
 		app.listen(PORT);
+		console.log("__dirname : " + path.join(__dirname, "../frontend/build"));
 	})
 	.catch((err) => {
 		console.log(err);

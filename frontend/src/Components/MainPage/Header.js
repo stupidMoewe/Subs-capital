@@ -22,11 +22,13 @@ const Header = (props) => {
 					className="header__btn"
 					// href="/preinscription"
 				>
-					<Button2
-						type={props.btnType}
-						linkTo={props.linkTo}
-						text={props.textBtn}
-					/>
+					{/* <Link to={"./preinscription"}> */}
+						<Button2
+							type={props.btnType}
+							linkTo={props.linkTo}
+							text={props.textBtn}
+						/>
+					{/* </Link> */}
 				</div>
 			</div>
 		</header>
