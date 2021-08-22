@@ -1,31 +1,95 @@
-import React from "react";
-import mockupApp from "../../images/mockupApp.png";
+import React, { Component, useEffect, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import Button from "../../HOC/button";
 
 import "../../sass/main.scss";
+import Button3 from "HOC/button3";
+import Input from "HOC/input";
+
+import { FaAngleDoubleDown } from "react-icons/fa";
+
+const scrollWithOffset = (el) => {
+	const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+	const yOffset = 0;
+	window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
+};
 
 const Accueil = () => {
+	let history = useHistory();
+
+	const [inputValue, setInputValue] = useState("");
+
+	const toasts = [];
+	const createToastNotification = () => {
+		const notif = {
+			innerText: "Préinscription réussie !",
+			type: "Success",
+			classList: ["toast", "success"],
+		};
+
+		toasts.push(notif);
+
+		setTimeout(() => {
+			notif.classList.push("fadding");
+			setTimeout(() => {
+				notif.classList = [];
+			}, 500);
+		}, 4000);
+	};
+
+	if (localStorage.getItem("success")) {
+		createToastNotification();
+	}
+
 	return (
-		<div className="accueil">
-			<div className="accueil__gauche">
-				<h1>Constituez une véritable épargne</h1>
-				<h2 className="">
-					Investissez simplement avec Subs dans les crypto-actifs
-				</h2>
-				<div className="accueil__gauche-form">
-					<input
-						className="input-email"
-						placeholder="Votre adresse mail"
-					/>
-					<Button color="indigo" linkTo="/preinscription">
-						Valider ma préinscription !
-					</Button>
+		<>
+			<div className="accueil section">
+				<div className="accueil__container">
+					<div className="accueil__titles">
+						<h1>L'épargne d'une nouvelle ère</h1>
+						<h2>1ère épargne grand public en crypto-actifs</h2>
+					</div>
+					<div className="accueil__description">
+						Compte épargne 100% garantie pour profiter des
+						cryptos-actifs
+					</div>
+					<div className="accueil__buttons">
+						<input
+							className="accueil__buttons-input"
+							placeholder="Votre adresse mail !"
+							value={inputValue}
+							onChange={(e) => setInputValue(e.target.value)}
+						/>
+						<Button3
+							linkTo="/choix"
+							onclick={localStorage.setItem("email", inputValue)}
+						>
+							Valider ma préinscription
+						</Button3>
+					</div>
+					<HashLink
+						to="#products"
+						className="accueil__haskLink"
+						smooth
+						scroll={(el) => scrollWithOffset(el)}
+					>
+						<FaAngleDoubleDown className="FaAngleDoubleDown" />
+					</HashLink>
 				</div>
 			</div>
-			<div className="accueil__droit">
-				<img className="mockup" src={mockupApp} alt="app-mockup" />
+			<div id="toasts">
+				{toasts.map((e, index) => {
+					console.log(e.classList);
+					return (
+						<div className={e.classList?.join(" ")} key={index}>
+							{e.innerText}
+						</div>
+					);
+				})}
 			</div>
-		</div>
+			;
+		</>
 	);
 };
 

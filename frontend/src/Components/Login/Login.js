@@ -1,224 +1,188 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { Component, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import firebase from "firebase/app";
+import { db } from "../../firebase";
+
+import useInput from "../hooks/use-input";
 
 import Input from "../../HOC/input";
-import logo from "../../images/Logo.png";
-import Button2 from "../../HOC/button2";
+import logo from "../../images/Logo-white.png";
+import Button3 from "../../HOC/button3";
 
-class Login extends Component {
-	state = {
-		name: "",
-		isNameValid: true,
-		email: "",
-		isEmailValid: true,
-		surname: "",
-		isSurnameValid: true,
-		redirect: false,
-		formSubmited: false,
-		formValid: false,
-		isModalOpened: false,
-	};
+const isNotEmpty = (value) => value.trim() !== "";
+const isEmail = (value) => value.includes("@");
 
-	nameHandleChange = (event) => {
-		this.setState({ name: event.target.value }, () => {
-			if (this.state.formSubmited) {
-				this.checkInputs();
-			}
-		});
-	};
-	emailHandleChange = (event) => {
-		this.setState({ email: event.target.value }, () => {
-			if (this.state.formSubmited) {
-				this.checkInputs();
-			}
-		});
-	};
-	surnameHandleChange = (event) => {
-		this.setState({ surname: event.target.value }, () => {
-			if (this.state.formSubmited) {
-				this.checkInputs();
-			}
-		});
-	};
+function Login(props) {
+	let history = useHistory();
+	const [isBox1Checked, setIsBox1Checked] = useState(false);
+	const [isBox2Checked, setIsBox2Checked] = useState(false);
+	const {
+		value: firstNameValue,
+		isValid: firstNameIsValid,
+		hasError: firstNameHasError,
+		valueChangedHandler: firstNameChangeHandler,
+		inputBlurHandler: firstNameBlurHandler,
+		reset: resetFirstName,
+	} = useInput(isNotEmpty);
+	const {
+		value: lastNameValue,
+		isValid: lastNameIsValid,
+		hasError: lastNameHasError,
+		valueChangedHandler: lastNameChangeHandler,
+		inputBlurHandler: lastNameBlurHandler,
+		reset: resetLastName,
+	} = useInput(isNotEmpty);
+	let {
+		value: emailValue,
+		isValid: emailIsValid,
+		hasError: emailHasError,
+		valueChangedHandler: emailChangeHandler,
+		inputBlurHandler: emailBlurHandler,
+		reset: resetEmail,
+	} = useInput(isEmail);
 
-	checkInputs = () => {
-		if (!this.state.isNameValid) {
-			if (this.nameChecker) {
-				this.setState({ isNameValid: true });
-			}
-		}
-		if (!this.state.isEmailValid) {
-			if (this.emailChecker) {
-				this.setState({ isEmailValid: true });
-			}
-		}
-		if (!this.state.isSurnameValid) {
-			if (this.surnameChecker) {
-				this.setState({ isSurnameValid: true });
-			}
-		}
-		if (this.state.isNameValid) {
-			if (!this.nameChecker) {
-				this.setState({ isNameValid: false });
-			}
-		}
-		if (this.state.isEmailValid) {
-			if (!this.emailChecker) {
-				this.setState({ isEmailValid: false });
-			}
-		}
-		if (this.state.isSurnameValid) {
-			if (!this.surnameChecker) {
-				this.setState({ isSurnameValid: false });
-			}
-		}
-		if (
-			this.state.isEmailValid &&
-			this.state.isNameValid &&
-			this.state.isSurnameValid
-		) {
-			this.setState({ formValid: true });
-		}
-	};
+	let formIsValid = false;
 
-	emailChecker = () => {
-		if (this.state.email.length > 1) {
-			return true;
-		}
-		return false;
-	};
-	nameChecker = () => {
-		if (this.state.name.length > 1) {
-			return true;
-		}
-		return false;
-	};
-	surnameChecker = () => {
-		if (this.state.surname.length > 1) {
-			return true;
-		}
-		return false;
-	};
-
-	formSubmitHandler = () => {
-		fetch("https://immense-cove-66864.herokuapp.com/api/users/newuser", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				email: this.state.email,
-				name: this.state.name,
-				surname: this.state.surname,
-			}),
-		})
-			.then((result) => {
-				result.json();
-			})
-			.then((info) => {
-				console.log(info);
-			});
-	};
-
-	// email: "testtesterman@gmail.com",
-	// 			name: "testtest",
-	// 			surname: "testtest",
-
-	// renderErrMessage = () => {
-	// 	let errMessage = <div className="login__btn-errMesage"></div>;
-	// 	if (!this.state.formValid && this.state.formSubmited) {
-	// 		errMessage = (
-	// 			<div className="login__btn-errMesage">
-	// 				Merci de compléter correctement le formulaire
-	// 			</div>
-	// 		);
-	// 	}
-	// 	return errMessage;
-	// };
-
-	render() {
-		if (this.state.redirect) {
-			return <Redirect to="/" />;
-		}
-		return (
-			<div className="login">
-				<a href="/">
-					<img src={logo} className="login__img" alt="logo-subs" />
-				</a>
-				<h2 className="login__title">Se préinscrire gratuitement.</h2>
-
-				<form className="form" onSubmit={this.formSubmitHandler}>
-					<div className="login__field">
-						<div className="login__label">Email:</div>
-						<Input
-							placeHolder="Email"
-							value={this.state.value}
-							onChange={this.emailHandleChange}
-							error={this.state.isEmailValid}
-						/>
-						<div />
-					</div>
-					<div className="login__field">
-						<div className="login__label">Quel est votre Nom?</div>
-						<Input
-							placeHolder="Nom"
-							value={this.state.value}
-							onChange={this.nameHandleChange}
-							error={this.state.isNameValid}
-						/>
-					</div>
-					<div className="login__field">
-						<div className="login__label">
-							Quel est votre prénom?
-						</div>
-						<Input
-							placeHolder="Prénom"
-							value={this.state.value}
-							onChange={this.surnameHandleChange}
-							error={this.state.isSurnameValid}
-						/>
-					</div>
-					<div className="login__checkboxes">
-						<div className="login__checkbox">
-							<input type="checkbox" required />
-							<label>
-								J'accepte de recevoir la newsletter de Subs
-							</label>
-						</div>
-						<div className="login__checkbox">
-							<input type="checkbox" required />
-							<label>
-								J'accepte les conditions générales d'utilisation
-							</label>
-						</div>
-					</div>
-
-					<div className="login__btn">
-						<Button2
-							text="Terminer ma préinscription"
-							type="blue"
-							onClick={this.formSubmitHandler}
-						/>
-					</div>
-				</form>
-				<div className="login__separator"></div>
-				<div className="login__footer">
-					<p className="login__footer-text">
-						Un email de validation vous sera envoyé. Votre
-						préinscription ne vous engage pas à une insciption
-						définitive lorsque notre service sera disponible. La
-						préinscription vous permets d'être tenu au courant de la
-						date de sortie de notre service et de pouvir en profiter
-						dans les prenmiers et avec pleins d'avantages. Votre
-						préiscription compte beaucoup pour notre
-						commercialisation. Toute l'équipe Subs vous remercie
-						d'avance pour votre confiance et reste à votre
-						disposition !
-					</p>
-				</div>
-			</div>
-		);
+	if (
+		firstNameIsValid &&
+		lastNameIsValid &&
+		emailIsValid &&
+		isBox2Checked
+	) {
+		formIsValid = true;
 	}
+
+	if (localStorage.getItem("email")) {
+		emailValue = localStorage.getItem("email");
+	}
+
+	const submitHandler = (event) => {
+		event.preventDefault();
+
+		if (!formIsValid) {
+			return;
+		}
+
+		db.collection("preinscriptions")
+			.add({
+				created: Date(),
+				email: emailValue,
+				name: lastNameValue,
+				surname: firstNameValue,
+			})
+			.then(() => {
+				console.log("Document successfully written!");
+				localStorage.setItem("success", true);
+				history.push({
+					pathname: "/",
+				});
+			})
+			.catch((error) => {
+				console.error("Error writing document: ", error);
+			});
+
+		resetFirstName();
+		resetLastName();
+		resetEmail();
+	};
+
+	return (
+		<div className="login">
+			<a href="/">
+				<img src={logo} className="login__img" alt="logo-subs" />
+			</a>
+			<h2 className="login__title">Se préinscrire gratuitement.</h2>
+
+			<form className="form" onSubmit={submitHandler}>
+				<div className="login__field">
+					<label className="login__label">Email:</label>
+					<Input
+						id="email"
+						name="Email"
+						placeHolder="Email"
+						value={emailValue}
+						onChange={emailChangeHandler}
+						onBlur={emailBlurHandler}
+						error={emailHasError}
+					/>
+					<div />
+				</div>
+				<div className="login__field">
+					<label className="login__label">Quel est votre Nom?</label>
+					<Input
+						id="name"
+						name="Nom"
+						placeHolder="Nom"
+						value={lastNameValue}
+						onChange={lastNameChangeHandler}
+						onBlur={lastNameBlurHandler}
+						error={lastNameHasError}
+					/>
+				</div>
+				<div className="login__field">
+					<div className="login__label">Quel est votre prénom?</div>
+					<Input
+						id="prenom"
+						name="Prenom"
+						placeHolder="Prénom"
+						value={firstNameValue}
+						onChange={firstNameChangeHandler}
+						onBlur={firstNameBlurHandler}
+						error={firstNameHasError}
+					/>
+				</div>
+				<div className="login__checkboxes">
+					<div className="login__checkbox">
+						<input
+							type="checkbox"
+							required
+							// onClick={() => setIsBox1Checked(!isBox1Checked)}
+						/>
+						<label>
+							J'accepte de recevoir la newsletter de Subs
+						</label>
+					</div>
+					<div className="login__checkbox">
+						<input
+							type="checkbox"
+							required
+							onClick={() => setIsBox2Checked(!isBox2Checked)}
+						/>
+						<label>
+							J'accepte les conditions générales d'utilisation
+						</label>
+					</div>
+				</div>
+
+				<div className="login__btn">
+					<Button3 disabled={!formIsValid}>
+						Terminer ma préinscription
+					</Button3>
+				</div>
+			</form>
+			<div className="login__separator"></div>
+			<div className="login__footer">
+				<p className="login__footer-text">
+					Un mail de validation vous sera envoyé afin de valider votre
+					préinscription.
+					<br />
+					Celle-ci ne vous engage pas à une inscription définitive
+					lorsque notre service sera disponible. La préinscription
+					vous permet d'être tenu au courant de la date de sortie de
+					notre service et de pouvoir en profiter dans les premiers et
+					avec pleins d'avantages. Votre préinscription compte
+					beaucoup pour notre développement.
+					<br />
+					Toute l'équipe Subs vous remercie d'avance pour votre
+					confiance et reste à votre disposition !
+					<br />
+					<br />
+					Besoin d'aide ?{" "}
+					<a href="mailto:bonjour@subs.fr">bonjour@subs.fr</a>
+				</p>
+			</div>
+		</div>
+	);
 }
 
 export default Login;

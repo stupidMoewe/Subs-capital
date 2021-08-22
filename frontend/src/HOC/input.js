@@ -1,18 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import './input.css';
+import "./input.css";
 
 const input = (props) => {
-	const error = props.error ? '' : 'error';
+	const error = props.error ? "error" : "";
+
 	return (
 		<div className="input-container">
 			<input
-				className={`input ` + error}
+				type="text"
+				id={props.id}
+				className={`input  + ${error ? "error" : "active"}`}
 				placeholder={props.placeHolder}
-				value={props.value}
 				onChange={props.onChange}
+				value={props.value}
+				onBlur={props.onBlur}
 			/>
-			{props.error ? null: <p className="input__error-message">{props.placeHolder} non valide</p> }
+			{/* {props.error ? (
+				<p className="input__error-message">{props.name} non valide</p>
+			) : null} */}
 		</div>
 	);
 };

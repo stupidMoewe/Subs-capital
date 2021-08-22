@@ -1,0 +1,23 @@
+.input2 {
+	border: 2px solid white;
+	border-radius: 500px;
+	padding: 10px 24px;
+	width: 100%;
+	font-size: 1.6rem;
+	background-color: transparent;
+	color: white;
+	outline: none;
+	margin: 0;
+	margin-bottom: 5px;
+	transition: 0.3s all;
+}
+.input2:focus {
+	border: 2px solid var(--subs-yellow);
+	transition: 0.3s all;
+}
+.input2::placeholder {
+	/* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: white;
+	opacity: 1; /* Firefox */
+	z-index: -1;
+}

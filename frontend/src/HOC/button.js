@@ -44,7 +44,6 @@ const button = (props) => {
 		default:
 			break;
 	}
-	console.log(props.href);
 	return (
 		<a
 			className={`button-default ` + props.color}

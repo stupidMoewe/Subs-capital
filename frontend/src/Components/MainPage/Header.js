@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Button2 from "../../HOC/button2";
+import Button3 from "../../HOC/button3";
 
 import "../../sass/main.scss";
-import logo from "../../images/Logo.png";
+import logo from "../../images/Logo-white.png";
 
 const Header = (props) => {
 	return (
@@ -13,7 +13,7 @@ const Header = (props) => {
 			<div className="header__container">
 				{/* // ${small ? 'active' : ''}`} ref={someRef} */}
 				<a className="header__logo" href="/">
-					<img src={logo} height="100" alt="logo-subs" />
+					<img src={logo} alt="logo-subs" />
 				</a>
 				{/* <button className="header__btn" href="preinscription" variant="outlined">
 					Login
@@ -23,11 +23,7 @@ const Header = (props) => {
 					// href="/preinscription"
 				>
 					{/* <Link to={"./preinscription"}> */}
-						<Button2
-							type={props.btnType}
-							linkTo={props.linkTo}
-							text={props.textBtn}
-						/>
+					<Button3 linkTo={props.linkTo}>Preinscription</Button3>
 					{/* </Link> */}
 				</div>
 			</div>

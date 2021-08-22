@@ -3,28 +3,47 @@
 	display: inline-block;
 	margin: auto;
 	width: 100%;
+	color: white;
 }
 
 .input {
-	height: 4rem;
+	/* height: 4rem;
 	width: 100%;
-	border: 1px solid black;
+	border: 2px solid var(--subs-yellow);
 	border-radius: 5px;
 	padding: 10px;
 	outline: none;
 	font-size: 1.6rem;
 	margin: 5px 0;
+	transition: all ease 0.1s; */
+	border: 2px solid var(--subs-yellow);
+	border-radius: 500px;
+	padding: 10px 24px;
+	width: 100%;
+	font-size: 1.6rem;
+	background-color: transparent;
+	color: white;
+	outline: none;
+	margin: 0;
+	margin-bottom: 5px;
+	transition: 0.3s all;
 }
 .input:focus {
-	border: 3px solid var(--blue);
-	transition: all ease .1s;
-    /* transform: scale(1.01); */
+	border: 2px solid var(--subs-yellow);
+	transition: 0.3s all;
+	/* transform: scale(1.01); */
 }
-.input.error{
-	border: 3px solid var(--red);
-	transition: all ease .1s;
+.input::placeholder {
+	/* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: white;
+	opacity: 1; /* Firefox */
+	z-index: -1;
 }
-.input__error-message{
+.input.error {
+	border: 2px solid red;
+	transition: all ease 0.1s;
+}
+.input__error-message {
 	display: block;
 	justify-self: left;
 	align-self: left;
