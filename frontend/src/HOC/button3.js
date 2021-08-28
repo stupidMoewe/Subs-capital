@@ -4,7 +4,7 @@ import "./button3.css";
 
 const Button3 = (props) => {
 	return (
-		<div>
+		<>
 			<a href={props.linkTo}>
 				<button
 					className="button3"
@@ -14,7 +14,7 @@ const Button3 = (props) => {
 					{props.children}
 				</button>
 			</a>
-		</div>
+		</>
 	);
 };
 

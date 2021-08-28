@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
-import App from './Components/App.js';
+import App from './app/index.js';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';

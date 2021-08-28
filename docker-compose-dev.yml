@@ -1,0 +1,43 @@
+version: "3"
+services:
+  react-app:
+    image: react-app
+    build: ./frontend/
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks: 
+      - subs
+    volumes:
+      - ./frontend/:/usr/src/app
+      - /usr/src/app/node_modules
+
+  api-server:
+    image: api-server
+    build: ./backend/
+    ports: 
+      - "5000:5000"
+    networks:
+      - subs
+    volumes:
+      - ./backend/:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4-bionic
+    ports:
+      - "21017:21017"
+    networks:
+      - subs
+    volumes: 
+      - mongo-data:/data/db
+
+networks:
+  subs:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

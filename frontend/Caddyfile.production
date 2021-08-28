@@ -1,0 +1,9 @@
+www.subs-capital.fr:443 {
+    tls martin.tefra@subs-capital.fr
+    root * /srv
+    route {
+        reverse_proxy /api* api-server:5000
+        try_files {path} {path}/ /index.html
+        file_server
+    }
+}

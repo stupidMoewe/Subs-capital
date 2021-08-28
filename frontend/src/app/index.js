@@ -1,20 +1,23 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Router from "./Router";
-import MainPage from "./MainPage/MainPage";
+import Router from "../Components/Router";
+import MainPage from "../Components/MainPage/MainPage";
 
 import "../sass/main.scss";
 
-const Login = React.lazy(() => import("./Login/Login"));
-const Choices = React.lazy(() => import("./Login/Choices"));
-const Article = React.lazy(() => import("./Article"));
-const ErrorPage = React.lazy(() => import("./MainPage/ErrorPage"));
+const Login = React.lazy(() => import("../Components/Login/Login"));
+const Choices = React.lazy(() => import("../Components/Login/Choices"));
+const Article = React.lazy(() => import("../Components/Article/Article"));
+const ArticleForm = React.lazy(() =>
+	import("../Components/Article/ArticleForm")
+);
+const ErrorPage = React.lazy(() => import("../Components/MainPage/ErrorPage"));
 
 class App extends React.Component {
 	render() {
 		return (
-			<React.Suspense fallback={<span>Loading...</span>}>
+			<React.Suspense fallback={<span>Chargement de la page</span>}>
 				<Router>
 					<div className="container">
 						<Switch>
@@ -23,9 +26,10 @@ class App extends React.Component {
 								component={Login}
 								exact
 							/>
+							<Route path="/choix" component={Choices} exact />
 							<Route
-								path="/choix"
-								component={Choices}
+								path="/article/new"
+								component={ArticleForm}
 								exact
 							/>
 							<Route

@@ -10,7 +10,7 @@
 	transition: all 0.2s;
 	padding: 10px 24px;
 	width: 100%;
-	font-size: 1.8rem;
+	font-size: inherit;
 	margin: 0;
 }
 .button3:disabled {

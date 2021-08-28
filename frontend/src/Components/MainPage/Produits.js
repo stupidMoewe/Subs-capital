@@ -2,7 +2,6 @@ import React from "react";
 import { HashLink } from "react-router-hash-link";
 
 import bank from "../../images/bank.png";
-import crypto from "../../images/crypto.png";
 import coinStack from "../../images/coin-stack.png";
 
 const scrollWithOffset = (el) => {

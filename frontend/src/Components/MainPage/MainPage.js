@@ -11,6 +11,7 @@ import "../../sass/main.scss";
 
 const MainPage = (props) => {
 	return (
+		<>
 		<div className="mainpage">
 			<Header btnType="blue" linkTo="/choix" textBtn="Se préinscrire" />
 			<Accueil />
@@ -19,6 +20,8 @@ const MainPage = (props) => {
 			<FAQ />
 			<Bottom />
 		</div>
+		{/* <ToastPortal/> */}
+		</>
 	);
 };
 

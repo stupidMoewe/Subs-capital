@@ -19,23 +19,24 @@ const Accueil = () => {
 	let history = useHistory();
 
 	const [inputValue, setInputValue] = useState("");
+	const [classList, setClassList] = useState(["toast", "success"]);
 
 	const toasts = [];
 	const createToastNotification = () => {
 		const notif = {
 			innerText: "Préinscription réussie !",
 			type: "Success",
-			classList: ["toast", "success"],
+			classList,
 		};
 
 		toasts.push(notif);
 
-		setTimeout(() => {
-			notif.classList.push("fadding");
-			setTimeout(() => {
-				notif.classList = [];
-			}, 500);
-		}, 4000);
+		// setTimeout(() => {
+		// 	notif.classList.push("fadding");
+		// 	setTimeout(() => {
+		// 		notif.classList = [];
+		// 	}, 500);
+		// }, 4000);
 	};
 
 	if (localStorage.getItem("success")) {
@@ -80,15 +81,22 @@ const Accueil = () => {
 			</div>
 			<div id="toasts">
 				{toasts.map((e, index) => {
-					console.log(e.classList);
+					setTimeout(() => {
+						classList.push("fadding");
+						console.log(classList);
+						// setTimeout(() => {
+						// 	setClassList(["toast", "success"]);
+						// 	console.log(classList);
+						// }, 500);
+					}, 4000);
+					console.log(classList.join(" "));
 					return (
-						<div className={e.classList?.join(" ")} key={index}>
+						<div className={classList.join(" ")} key={index}>
 							{e.innerText}
 						</div>
 					);
 				})}
 			</div>
-			;
 		</>
 	);
 };

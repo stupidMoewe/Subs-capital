@@ -1,13 +1,14 @@
 import React, { Component, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import firebase from "firebase/app";
-import { db } from "../../firebase";
 
 import useInput from "../hooks/use-input";
 
 import Input from "../../HOC/input";
 import logo from "../../images/Logo-white.png";
 import Button3 from "../../HOC/button3";
+import mentionsLegales from "../../images/legal-mentions.pdf";
+
+import { db } from "../../firebase";
 
 const isNotEmpty = (value) => value.trim() !== "";
 const isEmail = (value) => value.includes("@");
@@ -43,12 +44,7 @@ function Login(props) {
 
 	let formIsValid = false;
 
-	if (
-		firstNameIsValid &&
-		lastNameIsValid &&
-		emailIsValid &&
-		isBox2Checked
-	) {
+	if (firstNameIsValid && lastNameIsValid && emailIsValid && isBox2Checked) {
 		formIsValid = true;
 	}
 
@@ -91,7 +87,7 @@ function Login(props) {
 			<a href="/">
 				<img src={logo} className="login__img" alt="logo-subs" />
 			</a>
-			<h2 className="login__title">Se préinscrire gratuitement.</h2>
+			<h2 className="login__title">Se préinscrire gratuitement</h2>
 
 			<form className="form" onSubmit={submitHandler}>
 				<div className="login__field">
@@ -149,7 +145,11 @@ function Login(props) {
 							onClick={() => setIsBox2Checked(!isBox2Checked)}
 						/>
 						<label>
-							J'accepte les conditions générales d'utilisation
+							J'accepte les{" "}
+							<a href={mentionsLegales} target="_blank">
+								<u>conditions générales d'utilisation</u>
+							</a>
+							*
 						</label>
 					</div>
 				</div>

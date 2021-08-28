@@ -777,42 +777,49 @@
 	}
 }
 
+.articleForm {
+	form {
+		display: flex;
+		flex-direction: column;
+		& > * {
+			margin: 1rem;
+			display: flex;
+			flex-direction: column;
+			label {
+				display: inline-block;
+			}
+			input,
+			textarea {
+				padding: 6px;
+				border: 2px solid var(--subs-blue);
+				border-radius: 15px;
+				outline: none;
+			}
+		}
+		button {
+			padding: 6px;
+			border: 2px solid var(--subs-blue);
+			border-radius: 100px;
+			outline: none;
+			background-color: var(--subs-blue);
+			color: white;
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 // LOGIN
 ////////////////////////////////////////////////////////////////////////
 
 .login {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
-	// background-image: url("../images/fond-mobile-pre.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-color: #2d43a5;
-}
-
-@media (min-width: 480px) {
-	.login {
-		// background-image: url("../images/fond-tablette-pre.png");
-	}
-}
-@media (min-width: 1200px) {
-	.login {
-		// background-image: url("../images/fond-ordi-pre.png");
-	}
-}
-
-.login {
-	color: white;
 	&__title {
 		font-size: 3.2rem;
-		margin-top: 3rem;
+		// margin-top: 3rem;
 		color: inherit;
 	}
 	&__img {
 		width: 10rem;
-		margin-top: 2rem;
+		// margin-top: 2rem;
 	}
 
 	&__button-google {
@@ -820,9 +827,10 @@
 	}
 
 	.form {
-		width: 50rem;
-		margin: auto;
-		padding: 1rem;
+		width: 80%;
+		max-width: 50rem;
+		// margin: auto;
+		// padding: 1rem;
 		color: inherit;
 		// margin-top: 30rem;
 	}
@@ -833,6 +841,7 @@
 		display: flex;
 		justify-content: left;
 		margin-bottom: 1rem;
+		color: var(--subs-yellow);
 	}
 
 	&__field {
@@ -853,13 +862,16 @@
 			text-align: left;
 			// text-justify: left;
 		}
+		label a u {
+			color: white;
+		}
 	}
 	&__btn {
 		padding: 2rem;
-		height: 8rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		font-size: 1.6rem;
 		&-errMesage {
 			display: block;
 			justify-self: left;
@@ -880,8 +892,8 @@
 			content: "";
 			position: absolute;
 			top: 50px;
-			width: 400px;
-			left: -200px;
+			width: 300px;
+			left: -150px;
 			height: 2px;
 			border-bottom: 2px solid var(--subs-yellow);
 			border-radius: 100px;
@@ -891,9 +903,12 @@
 	&__footer {
 		// box-shadow: 0 0 15px -2px rgb(0 0 0 / 20%);
 		// padding-top: 2rem;
-		width: 70%;
-		margin: 3rem 15rem;
-		padding: 6rem 35rem;
+		width: 80%;
+		max-width: 50rem;
+		margin: auto;
+		margin-top: 10rem;
+		// margin: 3rem 15rem;
+		// padding: 6rem 35rem;
 		&-text {
 			// margin-top: 4rem;
 			font-size: 1.2rem;
@@ -904,16 +919,37 @@
 			}
 		}
 	}
-	@media (max-width: 600px) {
+
+	@media (min-width: 480px) {
 		.login {
 			width: 80%;
 			&__separator::before {
 				width: 300px;
 				left: -150px;
 			}
+
+			.form {
+				width: 80%;
+			}
+
+			&__separator {
+				&::before {
+					content: "";
+					position: absolute;
+					top: 50px;
+					width: 400px;
+					left: -200px;
+					height: 2px;
+					border-bottom: 2px solid var(--subs-yellow);
+					border-radius: 100px;
+				}
+			}
+			// background-image: url("../images/fond-tablette-pre.png");
 		}
-		.form {
-			width: 80%;
+	}
+	@media (min-width: 1200px) {
+		.login {
+			// background-image: url("../images/fond-ordi-pre.png");
 		}
 	}
 }
@@ -1061,12 +1097,15 @@
 
 .toast {
 	background-color: white;
-	color: rebeccapurple;
+	color: var(--subs-blue);
+	border: 2px solid var(--subs-blue);
+	font-weight: 700;
 	border-radius: 5px;
 	padding: 1rem 2rem;
 	margin: 0.5rem;
 	transition: all 0.1s ease-in-out;
 }
 .toast.fadding {
-	transform: translateX(200px);
+	transform: translateX(300px);
+	background-color: red;
 }

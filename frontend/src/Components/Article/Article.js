@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import Header from "./MainPage/Header";
+import Header from "../MainPage/Header";
 // import articles from "../articles";
 
 // import paulPic from "../images/paulPic.png";
 // import LouisPic from "../images/LouisPic.png";
 // import martinPic from "../images/martinPic.png";
-import author1 from "../images/author1.png";
+import author1 from "../../images/author1.png";
+
+const baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/api";
 
 const Article = (props) => {
 	const urlId = props.match.params.id;
@@ -16,7 +18,7 @@ const Article = (props) => {
 	const [article, setArticle] = useState([]);
 
 	useEffect(() => {
-		fetch("https://immense-cove-66864.herokuapp.com/api/articles" + urlId)
+		fetch(baseURL + "/articles/" + urlId)
 			.then((response) => {
 				return response.json();
 			})
