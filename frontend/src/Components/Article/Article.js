@@ -8,7 +8,7 @@ import Header from "../MainPage/Header";
 // import martinPic from "../images/martinPic.png";
 import author1 from "../../images/author1.png";
 
-const baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/api";
+const baseURL = process.env.REACT_APP_BASE_URL
 
 const Article = (props) => {
 	const urlId = props.match.params.id;

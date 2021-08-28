@@ -4,8 +4,8 @@ import Button3 from "HOC/button3";
 const Choices = () => {
 	const [isClicked1, setIsClicked1] = useState(false);
 	const [isClicked2, setIsClicked2] = useState(false);
-	localStorage.setItem("offre1Clicked", isClicked1);
-	localStorage.setItem("offre2Clicked", isClicked2);
+	sessionStorage.setItem("offre1Clicked", isClicked1);
+	sessionStorage.setItem("offre2Clicked", isClicked2);
 	return (
 		<div className="choices">
 			<h2>Selectionnez le/les compte-s qui vous intéressent?</h2>

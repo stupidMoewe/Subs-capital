@@ -30,10 +30,12 @@ let defaultClient = SibApiV3Sdk.ApiClient.instance;
 // 	});
 // };
 
-const newUser =(req, res, next) => {
+const newUser = (req, res, next) => {
 	const userEmail = req.body.email;
 	const userName = req.body.name;
 	const userSurname = req.body.surname;
+
+	console.log(userEmail, userName, userSurname);
 
 	let apiKey = defaultClient.authentications["api-key"];
 	apiKey.apiKey =

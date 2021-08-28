@@ -8,16 +8,24 @@ const ArticleForm = () => {
 	const [author, setAuthor] = useState("");
 	const [text, setText] = useState("");
 
+	const baseURL = process.env.REACT_APP_BASE_URL;
+
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (title && text) {
-			fetch("http://localhost:5000/api/articles/newarticle", {
+			fetch(baseURL + "/articles/newarticle", {
 				method: "post",
 				headers: {
 					Accept: "application/json, text/plain, */*",
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ title, text }),
+				body: JSON.stringify({
+					title,
+					subTitle,
+					readingTime,
+					author,
+					text,
+				}),
 			})
 				.then((res) => res.json())
 				.then((res) => console.log(res));

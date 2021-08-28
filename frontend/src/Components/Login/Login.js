@@ -13,6 +13,8 @@ import { db } from "../../firebase";
 const isNotEmpty = (value) => value.trim() !== "";
 const isEmail = (value) => value.includes("@");
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 function Login(props) {
 	let history = useHistory();
 	const [isBox1Checked, setIsBox1Checked] = useState(false);
@@ -48,8 +50,8 @@ function Login(props) {
 		formIsValid = true;
 	}
 
-	if (localStorage.getItem("email")) {
-		emailValue = localStorage.getItem("email");
+	if (sessionStorage.getItem("email")) {
+		emailValue = sessionStorage.getItem("email");
 	}
 
 	const submitHandler = (event) => {
@@ -59,23 +61,42 @@ function Login(props) {
 			return;
 		}
 
-		db.collection("preinscriptions")
-			.add({
-				created: Date(),
+		fetch(baseURL + "/users/newuser", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
 				email: emailValue,
 				name: lastNameValue,
 				surname: firstNameValue,
-			})
-			.then(() => {
-				console.log("Document successfully written!");
-				localStorage.setItem("success", true);
-				history.push({
-					pathname: "/",
-				});
-			})
-			.catch((error) => {
-				console.error("Error writing document: ", error);
+			}),
+		}).then((res) => {
+			console.log("Document successfully written!");
+			sessionStorage.setItem("success", true);
+			history.push({
+				pathname: "/",
 			});
+		});
+		// .catch((error) => {
+		// 	console.error("Error writing document: ", error);
+		// });
+
+		// db.collection("preinscriptions")
+		// 	.add({
+		// 		created: Date(),
+		// 		email: emailValue,
+		// 		name: lastNameValue,
+		// 		surname: firstNameValue,
+		// 	})
+		// 	.then(() => {
+		// 		console.log("Document successfully written!");
+		// 		sessionStorage.setItem("success", true);
+		// 		history.push({
+		// 			pathname: "/",
+		// 		});
+		// 	})
+		// 	.catch((error) => {
+		// 		console.error("Error writing document: ", error);
+		// 	});
 
 		resetFirstName();
 		resetLastName();

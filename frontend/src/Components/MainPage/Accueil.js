@@ -39,7 +39,7 @@ const Accueil = () => {
 		// }, 4000);
 	};
 
-	if (localStorage.getItem("success")) {
+	if (sessionStorage.getItem("success")) {
 		createToastNotification();
 	}
 
@@ -64,7 +64,10 @@ const Accueil = () => {
 						/>
 						<Button3
 							linkTo="/choix"
-							onclick={localStorage.setItem("email", inputValue)}
+							onclick={sessionStorage.setItem(
+								"email",
+								inputValue
+							)}
 						>
 							Valider ma préinscription
 						</Button3>
