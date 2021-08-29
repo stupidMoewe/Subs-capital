@@ -34,8 +34,10 @@ const newUser = (req, res, next) => {
 	const userEmail = req.body.email;
 	const userName = req.body.name;
 	const userSurname = req.body.surname;
+	const newsletter = req.body.newsletter;
+	const accountChoice = req.body.accountChoice;
 
-	console.log(userEmail, userName, userSurname);
+	console.log(userEmail, userName, userSurname, newsletter, accountChoice);
 
 	let apiKey = defaultClient.authentications["api-key"];
 	apiKey.apiKey =
@@ -45,8 +47,16 @@ const newUser = (req, res, next) => {
 	let apiInstance = new SibApiV3Sdk.ContactsApi();
 	let createContact = new SibApiV3Sdk.CreateContact();
 	createContact.email = userEmail;
-	createContact.attributes = { NOM: userSurname, PRENOM: userName };
-	createContact.listIds = [2];
+	createContact.attributes = {
+		NOM: userSurname,
+		PRENOM: userName,
+		TYPE_DE_COMPTE: accountChoice,
+	};
+	if (!newsletter) {
+		createContact.listIds = [8];
+	} else {
+		createContact.listIds = [6, 8];
+	}
 
 	// call SIB instance
 	apiInstance.createContact(createContact).then(

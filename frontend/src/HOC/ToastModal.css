@@ -1,0 +1,49 @@
+.toasts {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	z-index: 100;
+}
+.toast {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	transition: transform 0.6s ease-in-out;
+	animation: toast-in-right 0.7s;
+	font-weight: 700;
+	border-radius: 5px;
+	padding: 1rem 2rem;
+	box-shadow: 0 0 10px #999;
+	margin: 0.5rem;
+	font-size: 16px;
+}
+.toast-button {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-weight: 700;
+}
+.toast-image {
+	float: left;
+	margin-right: 15px;
+	align-items: center;
+	margin: auto 2rem auto 0;
+}
+
+.toast-image img {
+	width: 30px;
+	height: 30px;
+	margin: auto;
+}
+
+@keyframes toast-in-right {
+	0% {
+		transform: translateX(200px);
+	}
+	100% {
+		transform: translateX(0px);
+	}
+}

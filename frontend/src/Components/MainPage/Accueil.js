@@ -1,11 +1,11 @@
-import React, { Component, useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import Button from "../../HOC/button";
+import ToastModal from "../../HOC/ToastModal";
 
 import "../../sass/main.scss";
 import Button3 from "HOC/button3";
-import Input from "HOC/input";
+import check from "../../images/check.svg";
 
 import { FaAngleDoubleDown } from "react-icons/fa";
 
@@ -19,28 +19,19 @@ const Accueil = () => {
 	let history = useHistory();
 
 	const [inputValue, setInputValue] = useState("");
-	const [classList, setClassList] = useState(["toast", "success"]);
+	const [toastList, setToastList] = useState([]);
+	const [hasShownSuccessToast, setHasShownSuccessToast] = useState(false);
 
-	const toasts = [];
-	const createToastNotification = () => {
-		const notif = {
-			innerText: "Préinscription réussie !",
-			type: "Success",
-			classList,
+	if (history.location.state?.success && !hasShownSuccessToast) {
+		const successToast = {
+			id: Math.floor(Math.random() * 100),
+			title: "Préinscription réussie!",
+			description: "Vous recevrez un mail de confirmation",
+			icon: check,
+			type: "success",
 		};
-
-		toasts.push(notif);
-
-		// setTimeout(() => {
-		// 	notif.classList.push("fadding");
-		// 	setTimeout(() => {
-		// 		notif.classList = [];
-		// 	}, 500);
-		// }, 4000);
-	};
-
-	if (sessionStorage.getItem("success")) {
-		createToastNotification();
+		setToastList((oldToast) => [...oldToast, successToast]);
+		setHasShownSuccessToast(true);
 	}
 
 	return (
@@ -82,24 +73,7 @@ const Accueil = () => {
 					</HashLink>
 				</div>
 			</div>
-			<div id="toasts">
-				{toasts.map((e, index) => {
-					setTimeout(() => {
-						classList.push("fadding");
-						console.log(classList);
-						// setTimeout(() => {
-						// 	setClassList(["toast", "success"]);
-						// 	console.log(classList);
-						// }, 500);
-					}, 4000);
-					console.log(classList.join(" "));
-					return (
-						<div className={classList.join(" ")} key={index}>
-							{e.innerText}
-						</div>
-					);
-				})}
-			</div>
+			<ToastModal toastList={toastList} />
 		</>
 	);
 };

@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 
 import Router from "../Components/Router";
 import MainPage from "../Components/MainPage/MainPage";
@@ -14,49 +14,31 @@ const ArticleForm = React.lazy(() =>
 );
 const ErrorPage = React.lazy(() => import("../Components/MainPage/ErrorPage"));
 
-class App extends React.Component {
-	render() {
-		return (
-			<React.Suspense fallback={<span>Chargement de la page</span>}>
-				<Router>
-					<div className="container">
-						<Switch>
-							<Route
-								path="/preinscription"
-								component={Login}
-								exact
-							/>
-							<Route path="/choix" component={Choices} exact />
-							<Route
-								path="/article/new"
-								component={ArticleForm}
-								exact
-							/>
-							<Route
-								path="/article/:id"
-								component={Article}
-								exact
-							/>
-							<Route
-								path="/"
-								component={MainPage}
-								exact
-								// render={(props) => (
-								// 	<MainPage
-								// 		{...props}
-								// 		registrationSucceed={
-								// 			this.state.registrationSucceed
-								// 		}
-								// 	/>
-								// )}
-							/>
-							<Route path="/" component={ErrorPage} />
-						</Switch>
-					</div>
-				</Router>
-			</React.Suspense>
-		);
-	}
-}
+const App = () => {
+	return (
+		<React.Suspense fallback={<span>Chargement de la page</span>}>
+			<Router>
+				<div className="container">
+					<Switch>
+						<Route path="/preinscription" component={Login} exact />
+						<Route path="/choix" component={Choices} exact />
+						<Route
+							path="/article/new"
+							component={ArticleForm}
+							exact
+						/>
+						<Route path="/article/:id" component={Article} exact />
+						<Route
+							path="/"
+							component={MainPage}
+							exact
+						/>
+						<Route path="/" component={ErrorPage} />
+					</Switch>
+				</div>
+			</Router>
+		</React.Suspense>
+	);
+};
 
 export default App;
