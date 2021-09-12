@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import Header from "../MainPage/Header";
-// import articles from "../articles";
 
-// import paulPic from "../images/paulPic.png";
-// import LouisPic from "../images/LouisPic.png";
-// import martinPic from "../images/martinPic.png";
-import author1 from "../../images/author1.png";
+import paulPic from "../../images/author1.png";
+import LouisPic from "../../images/author1.png";
+import martinPic from "../../images/author1.png";
 
-const baseURL = process.env.REACT_APP_BASE_URL
+const baseURL = process.env.REACT_APP_BASE_URL;
 
 const Article = (props) => {
 	const urlId = props.match.params.id;
@@ -24,7 +22,6 @@ const Article = (props) => {
 			})
 			.then(
 				(data) => {
-					console.log(data.article);
 					setIsLoaded(true);
 					setArticle(data.article);
 				},
@@ -46,7 +43,7 @@ const Article = (props) => {
 			author = "Martin Tefra ";
 			picture = (
 				<img
-					src={author1}
+					src={martinPic}
 					className="article__author-picture"
 					width="50px"
 					height="50px"
@@ -57,7 +54,7 @@ const Article = (props) => {
 			author = "Louis Arsenneau";
 			picture = (
 				<img
-					src={author1}
+					src={LouisPic}
 					className="article__author-picture"
 					width="50px"
 					height="50px"
@@ -68,7 +65,7 @@ const Article = (props) => {
 			author = "Paul Poulain ";
 			picture = (
 				<img
-					src={author1}
+					src={paulPic}
 					className="article__author-picture"
 					width="50px"
 					height="50px"

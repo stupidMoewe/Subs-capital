@@ -38,13 +38,14 @@ const FAQ = () => {
 	};
 
 	const setAllToInnactive = () => {
-		setActive1(active1 == "active" ? "" : "");
-		setActive2(active2 == "active" ? "" : "");
-		setActive3(active3 == "active" ? "" : "");
-		setActive4(active4 == "active" ? "" : "");
-		setActive5(active5 == "active" ? "" : "");
-		setActive6(active6 == "active" ? "" : "");
+		setActive1(active1 === "active" ? "" : "");
+		setActive2(active2 === "active" ? "" : "");
+		setActive3(active3 === "active" ? "" : "");
+		setActive4(active4 === "active" ? "" : "");
+		setActive5(active5 === "active" ? "" : "");
+		setActive6(active6 === "active" ? "" : "");
 	};
+	
 	return (
 		<div className="faq" id="faq">
 			<h2>D'autres Questions?</h2>

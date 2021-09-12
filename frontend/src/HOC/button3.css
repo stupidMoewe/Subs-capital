@@ -12,93 +12,19 @@
 	width: 100%;
 	font-size: inherit;
 	margin: 0;
-}
-.button3:disabled {
-	background-color: lightgray;
-	color: var(--font-color-4);
-	border: 2px solid transparent;
-	cursor: not-allowed;
+	transition: all 0.3s ease;
 }
 
-/* Tablettes */
+.button3:hover {
+	transform: scale(1.02);
+}
+.button3:focus {
+	transform: scale(0.98);
+}
+
 @media (min-width: 480px) {
 	.button3 {
 		font-size: 1.9rem;
 		padding: 14px 32px;
-		/* width: 30rem; */
 	}
 }
-
-/* computers */
-/* @media (min-width: 1200px) {
-	.button3 {
-		font-size: 1.9rem;
-		padding: 14px 32px;
-	}
-} */
-
-/* .button2.blue {
-	color: var(--blue);
-	text-decoration: none;
-	border: 2px solid var(--blue);
-	background-color: var(--blue);
-	border-radius: 500px;
-	font-size: 1.6rem;
-	padding: 14px 32px;
-	cursor: pointer;
-	transition: all 0.2s;
-}
-.button2.blue:hover {
-	border: 2px solid var(--blue-hover);
-	background-color: var(--blue-hover);
-	transform: scale(1.04);
-}
-.button2.blue:active {
-	border: 2px solid var(--blue-pressed);
-	background-color: var(--blue-pressed);
-}
-
-.button2.indigo {
-	color: white;
-	text-decoration: none;
-	border: 1px solid var(--indigo);
-	background-color: var(--indigo);
-	border-radius: 500px;
-	font-size: 1.6rem;
-
-	padding: 14px 32px;
-	cursor: pointer;
-	transition: all 0.1s;
-}
-.button2.indigo:hover {
-	border: 2px solid var(--indigo-hover);
-	background-color: var(--indigo-hover);
-	transform: scale(1.04);
-}
-.button2.indigo:active {
-	border: 2px solid var(--indigo-pressed);
-	background-color: var(--indigo-pressed);
-	transform: scale(1.04);
-}
-
-.button2.transparent {
-	color: var(--font-color-1);
-	text-decoration: none;
-	border: 2px solid var(--font-color-1);
-	background-color: transparent;
-	border-radius: 500px;
-	font-size: 1.6rem;
-	padding: 14px 32px;
-	cursor: pointer;
-	transition: all 0.1s;
-}
-.button2.transparent:hover {
-	border: 2px solid var(--font-color-1);
-	background-color: transparent;
-	transform: scale(1.04);
-}
-.button2.transparent:active {
-	border: 2px solid var(--font-color-1);
-	background-color: transparent;
-	transform: scale(1.04);
-} */

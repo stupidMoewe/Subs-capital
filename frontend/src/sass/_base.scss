@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:wght@100;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:wght@100;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700;900&display=swap");
 
 * {
 	margin: 0;
@@ -58,6 +58,6 @@ h5 {
 
 	--subs-blue: rgb(44, 68, 165);
 	--subs-blue-shadowed: rgba(44, 68, 165, 0.3);
-	--subs-yellow: #f7c94d;
+	--subs-yellow: rgb(255, 198, 0);
 	--subs-yellow-shadowed: rgba(247, 201, 77, 0.3);
 }

@@ -21,15 +21,11 @@
 }
 
 .mainpage {
-	// position: absolute;
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	padding: 0;
 	margin: 0 auto;
-
-	// max-height: 100vh;
-	// border: 1px solid black;
 }
 
 .section {
@@ -46,8 +42,6 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-color: #2d43a5;
-	// max-width: 1100px;
-	// margin: 5rem auto;
 }
 
 @media (min-width: 480px) {
@@ -83,11 +77,9 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	// padding: 3rem;
 	overflow: hidden;
 	font-size: 25px;
 	margin: 2rem auto;
-	// margin: 5rem 0;
 }
 
 .etapes {
@@ -165,14 +157,14 @@
 }
 
 .articleForm {
- margin: 10rem;
+	margin: 10rem;
 }
 
 .login {
 	width: 100%;
 	height: 100%;
 	min-height: 100vh;
-	padding: 5rem;
+	padding: 2rem;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
@@ -183,7 +175,6 @@
 }
 
 .choices {
-	// height: 100vh;
 	width: 100%;
 	margin: 5rem;
 	padding: auto;

@@ -7,20 +7,23 @@ import PlanEpargne from "./PlanEpargne";
 import FAQ from "./FAQ";
 import Bottom from "./Bottom";
 
-import "../../sass/main.scss";
+import "sass/main.scss";
 
-const MainPage = (props) => {
+const MainPage = () => {
 	return (
 		<>
-		<div className="mainpage">
-			<Header btnType="blue" linkTo="/choix" textBtn="Se préinscrire" />
-			<Accueil />
-			<Produits />
-			<PlanEpargne />
-			<FAQ />
-			<Bottom />
-		</div>
-		{/* <ToastPortal/> */}
+			<div className="mainpage">
+				<Header
+					btnType="blue"
+					linkTo="/choix"
+					textBtn="Se préinscrire"
+				/>
+				<Accueil />
+				<Produits />
+				<PlanEpargne />
+				<FAQ />
+				<Bottom />
+			</div>
 		</>
 	);
 };

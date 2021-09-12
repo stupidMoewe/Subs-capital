@@ -1,7 +1,7 @@
 import React from "react";
 
 const ErrorPage = () => {
-    return <div>404 Error</div>;
+	return <div>Page non référenciée</div>;
 };
 
 export default ErrorPage;

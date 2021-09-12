@@ -1,6 +1,5 @@
 const Article = require("../models/article");
 
-// router.get("/", articlesControllers.getAllArticles);
 const getAllArticles = async (req, res, next) => {
 	let articles;
 	try {
@@ -13,7 +12,6 @@ const getAllArticles = async (req, res, next) => {
 	});
 };
 
-// router.get("/article/:id", articlesControllers.getArticleById);
 const getArticleById = async (req, res, next) => {
 	let article;
 	const artId = req.params.id;
@@ -26,11 +24,8 @@ const getArticleById = async (req, res, next) => {
 	res.status(200).json({ article: article.toObject({ getters: true }) });
 };
 
-// router.post("/newarticle", articlesControllers.addArticle);
 const addArticle = async (req, res, next) => {
-	console.log("inside new article");
 	const { title, subHeader, readingTime, author, text } = req.body;
-	console.log(title, subHeader, readingTime, author, text);
 	const timeElapsed = Date.now();
 	const today = new Date(timeElapsed);
 	const createNewArticle = new Article({

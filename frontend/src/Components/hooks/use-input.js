@@ -1,7 +1,11 @@
 import { useState } from "react";
 
-const useInput = (validateValue) => {
-	const [enteredValue, setEnteredValue] = useState("");
+const useInput = (validateValue, type) => {
+	const [enteredValue, setEnteredValue] = useState(
+		sessionStorage.getItem("email") && type === "email"
+			? sessionStorage.getItem("email")
+			: ""
+	);
 	const [isTouched, setIsTouched] = useState("");
 
 	const valueIsValid = validateValue(enteredValue);
@@ -15,7 +19,7 @@ const useInput = (validateValue) => {
 		setEnteredValue(event.target.value);
 	};
 
-	const inputBlurHandler = (event) => {
+	const inputBlurHandler = () => {
 		setIsTouched(true);
 	};
 

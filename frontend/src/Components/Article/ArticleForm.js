@@ -26,8 +26,7 @@ const ArticleForm = () => {
 					author,
 					text,
 				}),
-			})
-				.then((res) => res.json())
+			}).then((res) => res.json());
 		}
 	};
 	return (
@@ -46,15 +45,31 @@ const ArticleForm = () => {
 				</div>
 				<div>
 					<label>2eme titre</label>
-					<input type="text" />
+					<input
+						type="text"
+						onChange={(e) => {
+							setSubTitle(e.target.value);
+						}}
+					/>
 				</div>
 				<div>
 					<label>Temps de lecture</label>
-					<input type="text" />
+					<input
+						type="text"
+						onChange={(e) => {
+							setReadingTime(e.target.value);
+						}}
+					/>
 				</div>
 				<div>
 					<label>Auteur</label>
-					<input type="text" />
+					<input
+						type="text"
+						required
+						onChange={(e) => {
+							setAuthor(e.target.value);
+						}}
+					/>
 				</div>
 				<div>
 					<label>Text*</label>

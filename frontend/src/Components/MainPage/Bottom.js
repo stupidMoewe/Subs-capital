@@ -9,8 +9,6 @@ import twitter from "../../images/twitter.png";
 import instagram from "../../images/instagram.png";
 import flag from "../../images/france.png";
 
-// import '../sass/main.scss';
-
 const Bottom = () => {
 	return (
 		<div className="bottom">
@@ -33,7 +31,7 @@ const Bottom = () => {
 				<a
 					href="https://www.linkedin.com/company/subs-capital/"
 					target="_blank"
-					rel="noopener"
+					rel="noreferrer"
 				>
 					<img src={linkedin} alt="linkedin_icon" width="20px"></img>
 				</a>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom";
-import PropTypes from "prop-types";
 
 import "./ToastModal.css";
-import { Switch } from "react-router";
 
 const ToastModal = (props) => {
 	const { toastList, autoDeleteTime = 10000, autoDelete = true } = props;
@@ -22,7 +20,7 @@ const ToastModal = (props) => {
 		return () => {
 			clearInterval(interval);
 		};
-	}, [toastList, autoDelete, autoDeleteTime, list]);
+	}, [toastList, autoDelete, autoDeleteTime, list, deleteToast]);
 
 	const deleteToast = (id) => {
 		const listItemIndex = list.findIndex((e) => e.id === id);

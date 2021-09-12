@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import useInput from "../hooks/use-input";
-import ToastModal from "../../HOC/ToastModal";
+import ToastModal from "HOC/ToastModal";
+import Input from "HOC/input";
+import Button3 from "HOC/button3";
 
-import Input from "../../HOC/input";
-import logo from "../../images/Logo-white.png";
-import error from "../../images/error.svg";
-import Button3 from "../../HOC/button3";
-import mentionsLegales from "../../images/legal-mentions.pdf";
+import logo from "images/Logo-white.png";
+import error from "images/error.svg";
+import mentionsLegales from "images/legal-mentions.pdf";
 
 const isNotEmpty = (value) => value.trim() !== "";
 const isEmail = (value) => value.includes("@");
@@ -19,10 +19,9 @@ const Login = (props) => {
 	let history = useHistory();
 	const [isBox1Checked, setIsBox1Checked] = useState(false);
 	const [isBox2Checked, setIsBox2Checked] = useState(false);
+	const [parrainBoxClicked, setParrainBoxClicked] = useState(false);
 
 	const [toastList, setToastList] = useState([]);
-	const [showFailedToast, setShowFailedToast] = useState(false);
-	const [hasShownToast, setHasShownToast] = useState(false);
 	const [hasUserSubmittedForm, setHasUserSubmittedForm] = useState(false);
 
 	const {
@@ -32,7 +31,7 @@ const Login = (props) => {
 		valueChangedHandler: firstNameChangeHandler,
 		inputBlurHandler: firstNameBlurHandler,
 		reset: resetFirstName,
-	} = useInput(isNotEmpty);
+	} = useInput(isNotEmpty, "firstName");
 	const {
 		value: lastNameValue,
 		isValid: lastNameIsValid,
@@ -40,7 +39,7 @@ const Login = (props) => {
 		valueChangedHandler: lastNameChangeHandler,
 		inputBlurHandler: lastNameBlurHandler,
 		reset: resetLastName,
-	} = useInput(isNotEmpty);
+	} = useInput(isNotEmpty, "lastName");
 	let {
 		value: emailValue,
 		isValid: emailIsValid,
@@ -48,7 +47,15 @@ const Login = (props) => {
 		valueChangedHandler: emailChangeHandler,
 		inputBlurHandler: emailBlurHandler,
 		reset: resetEmail,
-	} = useInput(isEmail);
+	} = useInput(isEmail, "email");
+	let {
+		value: parrainNameValue,
+		isValid: parrainNameIsValid,
+		// hasError: emailHasError,
+		valueChangedHandler: parrainNameChangeHandler,
+		// inputBlurHandler: emailBlurHandler,
+		reset: resetParrainName,
+	} = useInput(isEmail, "email");
 
 	let formIsValid = false;
 
@@ -56,20 +63,16 @@ const Login = (props) => {
 		formIsValid = true;
 	}
 
-	if (sessionStorage.getItem("email")) {
-		emailValue = sessionStorage.getItem("email");
-	}
-
 	const accountChoice = () => {
 		let account = 0;
 		if (
-			sessionStorage.getItem("offre1Clicked") == "true" &&
-			sessionStorage.getItem("offre2Clicked") == "true"
+			sessionStorage.getItem("offre1Clicked") === "true" &&
+			sessionStorage.getItem("offre2Clicked") === "true"
 		) {
 			account = 3;
-		} else if (sessionStorage.getItem("offre1Clicked") == "true") {
+		} else if (sessionStorage.getItem("offre1Clicked") === "true") {
 			account = 1;
-		} else if (sessionStorage.getItem("offre2Clicked") == "true") {
+		} else if (sessionStorage.getItem("offre2Clicked") === "true") {
 			account = 2;
 		}
 		return account;
@@ -81,6 +84,14 @@ const Login = (props) => {
 		event.preventDefault();
 
 		if (!formIsValid) {
+			const failedToast = {
+				id: Math.floor(Math.random() * 100),
+				title: "Formulaire invalide",
+				description: "Veuillez compléter le formulaire",
+				icon: error,
+				type: "error",
+			};
+			setToastList((oldToast) => [...oldToast, failedToast]);
 			return;
 		}
 
@@ -100,28 +111,25 @@ const Login = (props) => {
 					pathname: "/",
 					state: { success: true },
 				});
-				setShowFailedToast(false);
 			} else {
-				history.push({
-					pathname: "/preinscription",
-					state: { failure: true },
-				});
-				setShowFailedToast(true);
+				const failedToast = {
+					id: Math.floor(Math.random() * 100),
+					title: "Il semblerait que",
+					description: "vous soyez déjà préinscrit.",
+					icon: error,
+					type: "error",
+				};
+				setToastList((oldToast) => [...oldToast, failedToast]);
 			}
 		});
-
-		setHasUserSubmittedForm(true);
 
 		resetFirstName();
 		resetLastName();
 		resetEmail();
+		resetParrainName();
 	};
 
-	if (
-		!history.location.state?.failure &&
-		!hasShownToast &&
-		hasUserSubmittedForm
-	) {
+	if (!history.location.state?.failure && hasUserSubmittedForm) {
 		const failedToast = {
 			id: Math.floor(Math.random() * 100),
 			title: "Une erreur est survenue",
@@ -130,7 +138,6 @@ const Login = (props) => {
 			type: "error",
 		};
 		setToastList((oldToast) => [...oldToast, failedToast]);
-		setHasShownToast(true);
 	}
 
 	return (
@@ -143,7 +150,9 @@ const Login = (props) => {
 
 				<form className="form" onSubmit={submitHandler}>
 					<div className="login__field">
-						<label className="login__label">Email:</label>
+						<label className="login__label">
+							Quel est votre Email:*
+						</label>
 						<Input
 							id="email"
 							name="Email"
@@ -157,7 +166,7 @@ const Login = (props) => {
 					</div>
 					<div className="login__field">
 						<label className="login__label">
-							Quel est votre Nom?
+							Quel est votre Nom?*
 						</label>
 						<Input
 							id="name"
@@ -171,7 +180,7 @@ const Login = (props) => {
 					</div>
 					<div className="login__field">
 						<div className="login__label">
-							Quel est votre prénom?
+							Quel est votre Prénom?*
 						</div>
 						<Input
 							id="prenom"
@@ -201,18 +210,43 @@ const Login = (props) => {
 							/>
 							<label>
 								J'accepte les{" "}
-								<a href={mentionsLegales} target="_blank">
+								<a
+									href={mentionsLegales}
+									target="_blank"
+									rel="noreferrer"
+								>
 									<u>conditions générales d'utilisation</u>
 								</a>
 								*
 							</label>
 						</div>
+						<div className="login__checkbox">
+							<input
+								type="checkbox"
+								onClick={() =>
+									setParrainBoxClicked(
+										parrainBoxClicked ? false : true
+									)
+								}
+							/>
+							<label>J'ai un parrain Subs</label>
+						</div>
+						{parrainBoxClicked ? (
+							<div>
+								<Input
+									id="parrainName"
+									name="parrainName"
+									placeHolder="Nom et prénom du parrain"
+									value={parrainNameValue}
+									onChange={parrainNameChangeHandler}
+								/>
+								<label>Nom du Parrain</label>
+							</div>
+						) : null}
 					</div>
 
 					<div className="login__btn">
-						<Button3 disabled={!formIsValid}>
-							Terminer ma préinscription
-						</Button3>
+						<Button3>Terminer ma préinscription</Button3>
 					</div>
 				</form>
 				<div className="login__separator"></div>
@@ -222,9 +256,19 @@ const Login = (props) => {
 						votre préinscription.
 						<br />
 						Celle-ci ne vous engage pas à une inscription définitive
-						lorsque notre service sera disponible. L'inscription
-						définitive et la sortie de notre produit sera
-						conditionné par le nombre de préinscriptions récolté.
+						lorsque notre service sera disponible.
+						<br />
+						<b>
+							L'inscription définitive ainsi que la sortie de
+							notre produit seront conditionnées par l’obtention
+							d’une accréditation délivrée par l’Autorité des
+							marchés financiers (AMF)
+						</b>{" "}
+						ainsi que l’Autorité de Contrôle Prudentiel et de
+						Résolution (ACPR), afin d’être considéré comme un
+						Prestataire de Services sur Actifs Numériques (PSAN).
+						Cela représente un gage de qualité et de confiance que
+						nous trouvons essentiel avec nos clients.
 						<br />
 						La préinscription vous permet d'être tenu au courant de
 						la date de sortie de notre service et de pouvoir en

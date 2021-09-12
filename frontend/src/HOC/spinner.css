@@ -1,0 +1,115 @@
+.spinner {
+	border: 1px solid black;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	font-size: 5rem;
+}
+.spinner-letter {
+	display: block;
+}
+#spinner-letter-1 {
+	animation: spinnerTransform1 3s linear infinite;
+}
+#spinner-letter-2 {
+	animation: spinnerTransform2 3s linear infinite;
+}
+#spinner-letter-3 {
+	animation: spinnerTransform3 3s linear infinite;
+}
+#spinner-letter-4 {
+	animation: spinnerTransform4 3s linear infinite;
+}
+#spinner-letter-5 {
+	animation: spinnerTransform5 3s linear infinite;
+}
+
+@keyframes spinnerTransform1 {
+	0% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	20% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+	100% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+}
+@keyframes spinnerTransform2 {
+	0% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	20% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	40% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+	100% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+}
+@keyframes spinnerTransform3 {
+	0% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	40% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	60% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+	100% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+}
+@keyframes spinnerTransform4 {
+	0% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	60% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	80% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+	100% {
+		color: var(--subs-blue);
+		transform: translateY(0px);
+	}
+}
+@keyframes spinnerTransform5 {
+	0% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	60% {
+		color: white;
+		transform: translateY(-30px);
+	}
+	80% {
+		color: var(--subs-yellow);
+		transform: translateY(0px);
+	}
+	100% {
+		color: var(--subs-yellow);
+		transform: translateY(0px);
+	}
+}

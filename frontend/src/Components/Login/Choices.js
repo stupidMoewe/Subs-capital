@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+
 import Button3 from "HOC/button3";
 
 const Choices = () => {
 	const [isClicked1, setIsClicked1] = useState(false);
 	const [isClicked2, setIsClicked2] = useState(false);
+	const [btnClicked, setBtnClicked] = useState(false);
+
 	sessionStorage.setItem("offre1Clicked", isClicked1);
 	sessionStorage.setItem("offre2Clicked", isClicked2);
+
 	return (
 		<div className="choices">
 			<h2>Selectionnez le/les compte-s qui vous intéressent?</h2>
@@ -16,7 +20,6 @@ const Choices = () => {
 					}`}
 					onClick={() => setIsClicked1(!isClicked1)}
 				>
-					{/* <div className="choices__box-cover"></div> */}
 					<div className="choices__box-texts">
 						<div className="choices__box-title">
 							Compte Subs Fondation
@@ -36,7 +39,6 @@ const Choices = () => {
 					}`}
 					onClick={() => setIsClicked2(!isClicked2)}
 				>
-					{/* <div className="choices__box-cover"></div> */}
 					<div className="choices__box-texts">
 						<div className="choices__box-title">
 							Compte Subs Alternatifs
@@ -50,6 +52,9 @@ const Choices = () => {
 					</div>
 				</div>
 			</div>
+			{btnClicked && !isClicked1 && !isClicked2 ? (
+				<p>Veuillez choisir au moins une offre</p>
+			) : null}
 			<div className="choices__validationBtn">
 				<Button3
 					disabled={!isClicked1 && !isClicked2}

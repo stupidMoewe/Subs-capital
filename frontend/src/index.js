@@ -13,6 +13,4 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-// ReactDOM.createPortal(child, container);
-
 AOS.init();

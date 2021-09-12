@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 
 import Router from "../Components/Router";
 import MainPage from "../Components/MainPage/MainPage";
+import Spinner from "../HOC/spinner";
 
 import "../sass/main.scss";
 
@@ -16,11 +17,12 @@ const ErrorPage = React.lazy(() => import("../Components/MainPage/ErrorPage"));
 
 const App = () => {
 	return (
-		<React.Suspense fallback={<span>Chargement de la page</span>}>
+		<React.Suspense fallback={<div></div>}>
 			<Router>
 				<div className="container">
 					<Switch>
 						<Route path="/preinscription" component={Login} exact />
+						<Route path="/spinner" component={Spinner} exact />
 						<Route path="/choix" component={Choices} exact />
 						<Route
 							path="/article/new"
@@ -28,11 +30,7 @@ const App = () => {
 							exact
 						/>
 						<Route path="/article/:id" component={Article} exact />
-						<Route
-							path="/"
-							component={MainPage}
-							exact
-						/>
+						<Route path="/" component={MainPage} exact />
 						<Route path="/" component={ErrorPage} />
 					</Switch>
 				</div>

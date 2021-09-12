@@ -1,47 +1,37 @@
 .input-container {
-	/* margin: 2rem; */
 	display: inline-block;
 	margin: auto;
 	width: 100%;
-	color: white;
 }
 
 .input {
-	/* height: 4rem;
-	width: 100%;
-	border: 2px solid var(--subs-yellow);
-	border-radius: 5px;
-	padding: 10px;
-	outline: none;
-	font-size: 1.6rem;
-	margin: 5px 0;
-	transition: all ease 0.1s; */
-	border: 2px solid var(--subs-yellow);
+	border: 2px solid var(--subs-blue);
 	border-radius: 500px;
 	padding: 10px 24px;
 	width: 100%;
 	font-size: 1.6rem;
 	background-color: transparent;
-	color: white;
+	color: var(--font-color-4);
 	outline: none;
 	margin: 0;
 	margin-bottom: 5px;
 	transition: 0.3s all;
 }
 .input:focus {
-	border: 2px solid var(--subs-yellow);
+	border: 2px solid var(--subs-blue);
 	transition: 0.3s all;
 	/* transform: scale(1.01); */
 }
 .input::placeholder {
 	/* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: white;
+	color: grey;
 	opacity: 1; /* Firefox */
 	z-index: -1;
 }
 .input.error {
 	border: 2px solid red;
 	transition: all ease 0.1s;
+	color: rgb(255, 0, 0, 0.5);
 }
 .input__error-message {
 	display: block;

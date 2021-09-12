@@ -12,12 +12,12 @@
 	transition: 0.3s all;
 }
 .input2:focus {
-	border: 2px solid var(--subs-yellow);
+	border: 2px solid var(--subs-blue);
 	transition: 0.3s all;
 }
 .input2::placeholder {
 	/* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: white;
+	color: var(--subs-blue);
 	opacity: 1; /* Firefox */
 	z-index: -1;
 }
