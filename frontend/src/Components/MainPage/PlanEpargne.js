@@ -11,21 +11,25 @@ const PlanEpargne = () => {
 				<div className="epargne__text">
 					<h3>Compte Subs Fondation</h3>
 					<p>
-						La gestion des crypto-actifs devient de plus en plus
-						complexe.
-						<br /> Grâce à ses propres outils de gestion de
-						portefeuille, Subs vous permet de placer au mieux votre
-						argent dans les crypto-actifs. <br />
-						Notre algorithme ainsi que nos équipes spécialisées
-						optimisent vos gains en minimisant vos risques. Aucune
-						compétence particulière en analyse financière n’est
-						requise, ce compte est entièrement géré par nos équipes.
+						Construire une épargne stable est difficile dans le
+						domaine des crypto-monnaies
+						<br /> Par le compte fondation, Subs vous permet de
+						construire une épargne avec un rendement intéressant et
+						récurrent. <br />
+						Nous nous occupons de la complexité d'un tel
+						investissement et assurons vos fonds.
+						<br />
+						Notre produit ne consiste pas en du trading de cryptos
+						mais à investir des protocoles de finance décentralisée,
+						qui est l'avenir de notre finance actuelle. Nous ne
+						jouons pas avec votre argent, mais en constituons une
+						épargne pérenne.
 						<br />
 						<br />
 						<b>Rendement espéré de 5%/an</b>
 						<br />
 						<i>
-							En bonus, vos dépôts sur ce compte épargne sont{" "}
+							Vos dépôts sur ce compte épargne sont{" "}
 							<u>garantis à 100% par Subs !</u>
 						</i>
 					</p>
@@ -39,21 +43,16 @@ const PlanEpargne = () => {
 					<img src={epargne2} alt="icon_sustainable_savings"></img>
 				</div>
 				<div className="epargne__text">
-					<h3>Comptes Subs alternatifs</h3>
+					<h3>Comptes Subs Alternatifs</h3>
 					<p>
-						Subs vous propose différents comptes épargnes
-						alternatifs fondés sur le principe du crédit. Vous
-						prêtez de l’argent pour une période déterminée contre un
-						rendement donné. Ces solutions d’épargne sont basées sur
-						la « finance décentralisée » et plus particulièrement
-						sur les règles du « Farming ». Afin d’obtenir le
-						meilleur de ces solutions, Subs a développé 5
-						algorithmes optimisant au mieux ces montages financiers.
-						<br />
-						Ces comptes également entièrement gérés par nos équipes,
-						vous permettent de choisir entre différents rendements
-						en fonction du risque que vous êtes prêt à assumer pour
-						un temps donné.
+						Basés sur le même principe que le compte fondation, les
+						comptes alternatifs proposés par Subs vous permettent
+						d'aller chercher des rendements bien plus intéressants.
+						Selon le taux d'intéret que vous aurez choisi (jusqu'à
+						50%!), Subs fera des placements plus risqués. La
+						contrepartie? Les fonds ne sont plus 100% garantis par
+						Subs et votre argent sera bloqué le temps de
+						l'investissement.
 						<br />
 						<br />
 						<b>
@@ -70,5 +69,49 @@ const PlanEpargne = () => {
 		</div>
 	);
 };
+
+{/* <div className="epargne__container bck-left">
+				<div className="epargne__text">
+					<h3>Vos données et actifs sont sécurisées</h3>
+					<p>
+						Nous suivons les mêmes mesures de sécurité que les
+						grandes banques. Vos données personnelles et bancaires
+						restent privées. Vos dépôts sur ce compte épargne sont
+						garantis à 100% par les fonds propres de Subs Capital
+						dans la limite de 25 000€.
+					</p>
+				</div>
+				<div className="epargne__image">
+					<img src={epargne1} alt="icon_secure_savings"></img>
+				</div>
+			</div>
+			<div className="epargne__container bck-right">
+				<div className="epargne__image">
+					<img src={epargne2} alt="icon_sustainable_savings"></img>
+				</div>
+				<div className="epargne__text">
+					<h3>Notre solution d'épargne est réglementée</h3>
+					<p>
+						L'inscription définitive ainsi que la sortie de notre
+						produit seront conditionnées par l’obtention d’une
+						accréditation délivrée par l’Autorité des marchés
+						financiers (AMF) ainsi que l’Autorité de Contrôle
+						Prudentiel et de Résolution (ACPR), afin d’être
+						considéré comme un Prestataire de Services sur Actifs
+						Numériques (PSAN). Cela représente un gage de qualité et
+						de confiance que nous trouvons essentiel avec nos
+						clients.
+					</p>
+				</div>
+			</div>
+			<div className="epargne__container bck-left">
+				<div className="epargne__text">
+					<h3>Vos actifs sont 100% gérés </h3>
+					<p>Lorem Ipsum ...</p>
+				</div>
+				<div className="epargne__image">
+					<img src={epargne1} alt="icon_secure_savings"></img>
+				</div>
+			</div> */}
 
 export default PlanEpargne;

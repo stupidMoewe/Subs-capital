@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../MainPage/Header";
 
 import paulPic from "../../images/author1.png";
-import LouisPic from "../../images/author1.png";
+import LouisPic from "../../images/picture_louis.png";
 import martinPic from "../../images/author1.png";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
@@ -33,9 +33,9 @@ const Article = (props) => {
 	}, []);
 
 	if (error) {
-		return <div>Error: {error.message}</div>;
+		return <div>Erreur: {error.message}</div>;
 	} else if (!isLoaded) {
-		return <div>Loading...</div>;
+		return <div>Chargement...</div>;
 	} else {
 		let picture;
 		let author;
@@ -79,6 +79,7 @@ const Article = (props) => {
 					linkTo="/"
 					btnType="indigo"
 					textBtn="Retour au site"
+					logoType="blue"
 				></Header>
 				<div className="article">
 					<h1 className="article__header">{article.title}</h1>
@@ -86,11 +87,11 @@ const Article = (props) => {
 					<div className="article__author">
 						{picture}
 						<div className="article__author-text">
-							{author}• {article.parutionDate}•{" "}
-							{article.readingTime} min à lire
+							<p>{author}</p> •
+							<p> {article.readingTime} min à lire</p>
 						</div>
 					</div>
-					<div className="article__text">{article.text}</div>
+					<div className="article__text">{`${article.text}`}</div>
 				</div>
 			</>
 		);

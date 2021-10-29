@@ -9,7 +9,11 @@ import "../sass/main.scss";
 
 const Login = React.lazy(() => import("../Components/Login/Login"));
 const Choices = React.lazy(() => import("../Components/Login/Choices"));
+const Confirmation = React.lazy(() =>
+	import("../Components/Login/Confirmation")
+);
 const Article = React.lazy(() => import("../Components/Article/Article"));
+const Articles = React.lazy(() => import("../Components/Article/Articles"));
 const ArticleForm = React.lazy(() =>
 	import("../Components/Article/ArticleForm")
 );
@@ -22,6 +26,11 @@ const App = () => {
 				<div className="container">
 					<Switch>
 						<Route path="/preinscription" component={Login} exact />
+						<Route
+							path="/confirmation"
+							component={Confirmation}
+							exact
+						/>
 						<Route path="/spinner" component={Spinner} exact />
 						<Route path="/choix" component={Choices} exact />
 						<Route
@@ -29,6 +38,7 @@ const App = () => {
 							component={ArticleForm}
 							exact
 						/>
+						<Route path="/articles" component={Articles} exact />
 						<Route path="/article/:id" component={Article} exact />
 						<Route path="/" component={MainPage} exact />
 						<Route path="/" component={ErrorPage} />

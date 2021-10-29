@@ -37,9 +37,7 @@ const Accueil = () => {
 		setHasShownSuccessToast(true);
 	}
 
-	// const texts = ["Votre adresse mail !                    "];
 	const texts = ["abc@xyz.com                    "];
-	// const texts = ["votreadressemail@mail.com                    "];
 	const speed = 100;
 
 	useEffect(() => {
@@ -75,7 +73,7 @@ const Accueil = () => {
 					</div>
 					<div className="accueil__description">
 						Compte épargne 100% garantie pour profiter des
-						cryptos-actifs
+						crypto-actifs
 					</div>
 					<div className="accueil__buttons">
 						<input

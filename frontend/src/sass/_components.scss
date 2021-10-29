@@ -82,10 +82,11 @@
 		}
 	}
 	&__description {
-		color: var(--subs-yellow);
-		font-size: 1.6rem;
-		margin-top: 7rem;
-		margin-bottom: 2rem;
+		display: none;
+		// color: var(--subs-yellow);
+		// font-size: 1.6rem;
+		// margin-top: 7rem;
+		// margin-bottom: 2rem;
 	}
 	&__buttons {
 		margin: 0 1rem;
@@ -225,7 +226,6 @@
 			background-color: var(--subs-yellow);
 			color: var(--subs-blue);
 		}
-		width: 100%;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -234,12 +234,17 @@
 		align-items: center;
 	}
 	&__card {
+		// border: 3px solid var(--subs-yellow);
+		// color: var(--subs-blue);
 		box-shadow: 0 0 35px -2px rgb(0 0 0 / 20%);
-		width: 40rem;
-		height: 36rem;
+		// width: 40rem;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
 		border-radius: 2rem;
 		margin: 3rem 4rem;
-		padding: 2rem;
+		padding: 3rem;
 		transition: all 0.3s ease-in-out !important;
 
 		&:hover {
@@ -247,7 +252,6 @@
 			transition: all 0.3s ease-in-out !important;
 		}
 		&-header {
-			height: 14rem;
 			h3 {
 				font-size: 2rem;
 				font-weight: bold;
@@ -256,10 +260,9 @@
 			}
 		}
 		&-description {
-			height: 13rem;
 			font-size: 1.6rem;
 			color: inherit;
-			text-align: justify;
+			text-align: start;
 			text-justify: inter-word;
 			&-lien {
 				text-decoration: none;
@@ -384,16 +387,57 @@
 
 .epargne {
 	margin-top: 15rem;
+	.bck-left {
+		:before {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: -10px;
+			width: 80rem;
+			height: 30rem;
+			border-radius: 0 100px 100px 0;
+			background-color: var(--subs-blue-very-shadowed);
+		}
+	}
+	.bck-right {
+		:after {
+			content: "";
+			position: absolute;
+			right: 0;
+			top: -10px;
+			width: 80rem;
+			height: 35rem;
+			border-radius: 100px 0px 0 100px;
+			background-color: var(--subs-blue-very-shadowed);
+		}
+	}
 	h2 {
 		font-size: 2.7rem;
 		font-weight: bold;
 	}
+	// :nth-child(1) {
+	// 	.epargne__container {
+	// 		border: 1px solid red;
+	// 	}
+	// }
 	&__container {
-		width: 100%;
-		margin: 10rem 0;
+		// width: 100vw;
+		left: 0;
+		margin: 10rem auto;
+		padding: 0 20%;
 		display: flex;
+		position: relative;
+		// :before {
+		// 	content: "";
+		// 	position: absolute;
+		// 	left: 0;
+		// 	top: 0;
+		// 	width: 80rem;
+		// 	height: 35rem;
+		// 	border-radius: 0px 100px 100px 0px;
+		// 	background-color: var(--subs-blue-very-shadowed);
+		// }
 	}
-
 	&__text {
 		width: 55%;
 		padding: 3rem 0;
@@ -403,21 +447,44 @@
 		h3 {
 			margin-bottom: 2rem;
 			font-size: 2.5rem;
+			text-align: start;
 		}
 	}
 	&__image {
 		width: 45%;
 		margin: auto;
+		img {
+			display: block;
+			width: 100%;
+			margin: auto;
+		}
 	}
 }
 
 @media (max-width: 600px) {
 	.epargne {
-		width: 80%;
+		.bck-left {
+			&:before {
+				width: 10rem;
+				border: 1px solid red;
+			}
+		}
+		.bck-right {
+			&:after {
+				width: 10rem;
+				border: 1px solid red;
+			}
+		}
 		&__container {
+			margin: 10rem 0;
+			padding: 2rem;
+			// 	&::before {
+			// 		width: 40rem;
+			// 	}
 		}
 		&__text {
 			width: 100%;
+			padding: 0;
 			h3 {
 				font-size: 2rem;
 			}
@@ -710,6 +777,29 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+// ARTICLES
+////////////////////////////////////////////////////////////////////////
+
+.articles {
+	&__container {
+		border: 1px solid black;
+		display: flex;
+		max-width: 70%;
+		justify-content: center;
+		align-items: flex-start;
+		margin: auto;
+		flex-wrap: wrap;
+	}
+	&__post {
+		border: 1px solid grey;
+		width: 30rem;
+		height: 44rem;
+		margin: 2rem;
+		border-radius: 10px;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
 // ARTICLE
 ////////////////////////////////////////////////////////////////////////
 
@@ -717,8 +807,10 @@
 	text-align: justify;
 	text-justify: left;
 	&__header {
+		text-align: justify;
+		text-justify: left !important;
 		width: 100%;
-		margin: 6rem auto 0 auto;
+		margin: 4rem auto 0 auto;
 		color: var(--font-color-1);
 	}
 	&__sub-header {
@@ -742,6 +834,9 @@
 			margin-right: 0;
 			font-size: 1.6rem;
 			color: var(--font-color-4);
+			p {
+				display: inline-block;
+			}
 		}
 	}
 	&__text {
@@ -1068,5 +1163,30 @@
 	&.fadding {
 		transform: translateX(300px);
 		background-color: red;
+	}
+}
+
+.confirmation {
+	&__container {
+		background-color: var(--subs-blue);
+		border-radius: 30px;
+		margin: auto 5rem;
+		padding: 5rem;
+		height: 40rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+		color: white;
+		h2 {
+			color: white;
+		}
+	}
+}
+@media (min-width: 480px) {
+	.confirmation {
+		&__container {
+			margin: auto;
+		}
 	}
 }

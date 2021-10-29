@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const Article = require("./models/article");
+const fs = require("fs");
 require("dotenv").config();
 
 const db = require("./db");
@@ -18,6 +20,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 // Main Routes
 app.use("/api/articles", articlesRoutes);
 app.use("/api/users", usersRoutes);
+// app.use("/feed.rss", require("./feed.rss"));
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");

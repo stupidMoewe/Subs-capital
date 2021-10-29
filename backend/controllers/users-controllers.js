@@ -8,6 +8,7 @@ const newUser = (req, res, next) => {
 	const userSurname = req.body.surname;
 	const newsletter = req.body.newsletter;
 	const accountChoice = req.body.accountChoice;
+	const parrainNameValue = req.body.parrainNameValue;
 
 	let apiKey = defaultClient.authentications["api-key"];
 	apiKey.apiKey =
@@ -18,9 +19,10 @@ const newUser = (req, res, next) => {
 	let createContact = new SibApiV3Sdk.CreateContact();
 	createContact.email = userEmail;
 	createContact.attributes = {
-		NOM: userSurname,
-		PRENOM: userName,
+		NOM: userName,
+		PRENOM: userSurname,
 		TYPE_DE_COMPTE: accountChoice,
+		NOM_DU_PARRAIN: parrainNameValue,
 	};
 	if (!newsletter) {
 		createContact.listIds = [8];

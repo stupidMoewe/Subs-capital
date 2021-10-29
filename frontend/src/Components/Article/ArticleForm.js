@@ -13,6 +13,7 @@ const ArticleForm = () => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (title && text) {
+			console.log(baseURL + "/articles/newarticle");
 			fetch(baseURL + "/articles/newarticle", {
 				method: "post",
 				headers: {
@@ -83,7 +84,9 @@ const ArticleForm = () => {
 					></textarea>
 				</div>
 
-				<button type="submit">Submit</button>
+				<button type="submit" onClick={(e) => submitHandler(e)}>
+					Submit
+				</button>
 			</form>
 		</div>
 	);

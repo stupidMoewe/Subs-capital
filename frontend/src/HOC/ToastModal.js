@@ -11,17 +11,6 @@ const ToastModal = (props) => {
 		setList(toastList);
 	}, [toastList, list]);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (autoDelete && toastList.length && list.length) {
-				deleteToast(toastList[0].id);
-			}
-		}, autoDeleteTime);
-		return () => {
-			clearInterval(interval);
-		};
-	}, [toastList, autoDelete, autoDeleteTime, list, deleteToast]);
-
 	const deleteToast = (id) => {
 		const listItemIndex = list.findIndex((e) => e.id === id);
 		const toastListItem = toastList.findIndex((e) => e.id === id);
@@ -45,6 +34,17 @@ const ToastModal = (props) => {
 		}
 		return style;
 	};
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (autoDelete && toastList.length && list.length) {
+				deleteToast(toastList[0].id);
+			}
+		}, autoDeleteTime);
+		return () => {
+			clearInterval(interval);
+		};
+	}, [toastList, autoDelete, autoDeleteTime, list, deleteToast]);
 
 	return (
 		<div className="toasts">

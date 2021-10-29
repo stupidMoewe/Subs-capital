@@ -48,14 +48,8 @@ const Login = (props) => {
 		inputBlurHandler: emailBlurHandler,
 		reset: resetEmail,
 	} = useInput(isEmail, "email");
-	let {
-		value: parrainNameValue,
-		isValid: parrainNameIsValid,
-		// hasError: emailHasError,
-		valueChangedHandler: parrainNameChangeHandler,
-		// inputBlurHandler: emailBlurHandler,
-		reset: resetParrainName,
-	} = useInput(isEmail, "email");
+
+	const [parrainNameValue, setParrainNameValue] = useState("");
 
 	let formIsValid = false;
 
@@ -104,6 +98,7 @@ const Login = (props) => {
 				surname: firstNameValue,
 				newsletter: isBox1Checked,
 				accountChoice: accountChoosen,
+				parrainNameValue: parrainNameValue,
 			}),
 		}).then((res) => {
 			if (res.ok) {
@@ -126,7 +121,7 @@ const Login = (props) => {
 		resetFirstName();
 		resetLastName();
 		resetEmail();
-		resetParrainName();
+		// resetParrainName();
 	};
 
 	if (!history.location.state?.failure && hasUserSubmittedForm) {
@@ -238,7 +233,9 @@ const Login = (props) => {
 									name="parrainName"
 									placeHolder="Nom et prénom du parrain"
 									value={parrainNameValue}
-									onChange={parrainNameChangeHandler}
+									onChange={(e) =>
+										setParrainNameValue(e.target.value)
+									}
 								/>
 								<label>Nom du Parrain</label>
 							</div>

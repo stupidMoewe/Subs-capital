@@ -7,6 +7,7 @@ const getAllArticles = async (req, res, next) => {
 	} catch (err) {
 		return next(err);
 	}
+
 	res.json({
 		articles: articles.map((art) => art.toObject({ getters: true })),
 	});
@@ -20,6 +21,7 @@ const getArticleById = async (req, res, next) => {
 	} catch (err) {
 		return next(err);
 	}
+	console.log(article);
 
 	res.status(200).json({ article: article.toObject({ getters: true }) });
 };

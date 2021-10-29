@@ -1,4 +1,4 @@
-http://localhost:80 {
+http://localhost:8080 {
   root * /srv
   route {
     reverse_proxy /api* api-server:5000

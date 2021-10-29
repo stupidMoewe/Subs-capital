@@ -17,6 +17,7 @@ const MainPage = () => {
 					btnType="blue"
 					linkTo="/choix"
 					textBtn="Se préinscrire"
+					logoType="white"
 				/>
 				<Accueil />
 				<Produits />
