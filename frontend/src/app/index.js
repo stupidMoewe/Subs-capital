@@ -39,7 +39,7 @@ const App = () => {
 							exact
 						/>
 						<Route path="/articles" component={Articles} exact />
-						<Route path="/article/:id" component={Article} exact />
+						<Route path="/article/:id" component={Article} />
 						<Route path="/" component={MainPage} exact />
 						<Route path="/" component={ErrorPage} />
 					</Switch>
