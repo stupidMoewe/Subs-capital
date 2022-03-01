@@ -1,0 +1,22 @@
+[
+	{
+		"name": "sushiswap",
+		"BCPercentage": 0.4,
+		"pools": [
+			{ "name": "ETH-USDT", "protocolPercentage": 2.24084750e-01 },
+			{ "name": "USDC-ETH", "protocolPercentage": 3.03373984e-01 },
+			{ "name": "DAI-ETH", "protocolPercentage": 2.31495779e-01 },
+			{ "name": "sUSD-ETH", "protocolPercentage": 1.39588209e-03 },
+			{ "name": "SNX-ETH", "protocolPercentage": 0 },
+			{ "name": "SUSHI-ETH", "protocolPercentage": 0 },
+			{ "name": "WBTC-ETH", "protocolPercentage": 0 },
+			{
+				"name": "WBTC-BADGER",
+				"protocolPercentage": 0
+			},
+			{ "name": "TUSD-ETH", "protocolPercentage":1.03776288e-02 },
+			{ "name": "OHM-DAI", "protocolPercentage": 2.29271977e-01 },
+			{ "name": "USDC-QUARTZ", "protocolPercentage": 0 }
+		]
+	}
+]

@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:wght@100;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:wght@100;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;600;700;800;900&display=swap");
 
 * {
 	margin: 0;
@@ -19,6 +19,7 @@
 html {
 	box-sizing: border-box;
 	font-size: 62.5%;
+	overflow-x: hidden;
 }
 
 // myriad pro
@@ -40,6 +41,7 @@ h5 {
 }
 
 :root {
+	// --background-color: rgb(249, 249, 252);
 	--background-color: rgb(249, 249, 252);
 	--theme-color-1: rgb(0, 0, 201);
 	--theme-color-2: rgb(208, 7, 208);
@@ -56,9 +58,9 @@ h5 {
 	--indigo-hover: #823cf4;
 	--indigo-pressed: #995ef7;
 
-	--subs-blue: rgb(44, 68, 165);
+	--subs-blue: #2c44a5;
 	--subs-blue-shadowed: rgba(44, 68, 165, 0.3);
 	--subs-blue-very-shadowed: rgba(73, 91, 163, 0.048);
-	--subs-yellow: rgb(255, 198, 0);
+	--subs-yellow: #ffc600;
 	--subs-yellow-shadowed: rgba(247, 201, 77, 0.3);
 }

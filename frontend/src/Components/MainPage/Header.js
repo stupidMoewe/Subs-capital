@@ -11,13 +11,15 @@ const Header = (props) => {
 	const [isHeaderTop, setIsHeaderTop] = useState(true);
 
 	useEffect(() => {
-		window.onscroll = () => {
-			if (window.pageYOffset > vh) {
-				setIsHeaderTop(false);
-			} else {
-				setIsHeaderTop(true);
-			}
-		};
+		if (props.headerFixed) {
+			window.onscroll = () => {
+				if (window.pageYOffset > vh) {
+					setIsHeaderTop(false);
+				} else {
+					setIsHeaderTop(true);
+				}
+			};
+		}
 	}, []);
 
 	const vh = window.innerHeight;
@@ -53,14 +55,14 @@ const Header = (props) => {
 				<div className="header__right">
 					<a
 						className="header__articles"
-						href="/articles"
+						href="/portfolio"
 						style={{
 							color: isHeaderTop
 								? "rgba(255, 255, 255, 0.7)"
 								: "var(--subs-blue)",
 						}}
 					>
-						Articles
+						Portfolio
 					</a>
 					<div className="header__btn">
 						<Button3 linkTo={props.linkTo} size="small">

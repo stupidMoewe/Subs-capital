@@ -15,8 +15,8 @@ const Bottom = () => {
 			<div className="bottom__top">
 				<img src={logo} alt="subs_logo"></img>
 				<div className="bottom__top-email">
-					<a href="mailto:bonjour@subs-capital.com">
-						bonjour@subs-capital.com
+					<a href="mailto:bonjour@subs-capital.fr">
+						bonjour@subs-capital.fr
 					</a>
 				</div>
 			</div>
@@ -59,7 +59,7 @@ const Bottom = () => {
 					Protection des données
 				</a>
 			</div>
-			<div className="bottom__copyright">© Subs-capital 2021</div>
+			<div className="bottom__copyright">© Subs-capital 2022</div>
 			<div className="bottom__flag">
 				<img src={flag} alt="french_flag"></img>
 				<div>France</div>

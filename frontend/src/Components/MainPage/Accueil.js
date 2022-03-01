@@ -5,9 +5,9 @@ import { HashLink } from "react-router-hash-link";
 import ToastModal from "HOC/ToastModal";
 import Button3 from "HOC/button3";
 
-import "sass/main.scss";
 import check from "images/check.svg";
 import { FaAngleDoubleDown } from "react-icons/fa";
+import Emoji from "Components/Emoji/Emoji";
 
 const scrollWithOffset = (el) => {
 	const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
@@ -69,7 +69,10 @@ const Accueil = () => {
 							{/* L'épargne d'une nouvelle ère */}
 							Nos condoléances au livret A
 						</h1>
-						<h2>1ère épargne grand public en crypto-actifs</h2>
+						<h2>
+							1ère épargne grand public en crypto-actifs{"  "}
+							<Emoji symbol={"0x1F680"} />
+						</h2>
 					</div>
 					<div className="accueil__description">
 						Compte épargne 100% garantie pour profiter des

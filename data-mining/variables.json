@@ -1,0 +1,17 @@
+{
+	"blockchains": ["ethereum"],
+	"protocols": [{ "ethereum": ["sushiswap"] }],
+	"poolsAddress": [
+		{
+			"ethereum": [
+				{
+					"sushiswap": [
+						"0x06da0fd433c1a5d7a4faa01111c044910a184553",
+						"0x397ff1542f962076d0bfe58ea045ffa2d347aca0",
+						"0xc3d03e4f041fd4cd388c549ee2a29a9e5075882f"
+					]
+				}
+			]
+		}
+	]
+}

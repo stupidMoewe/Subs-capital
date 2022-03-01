@@ -7,7 +7,7 @@ import PlanEpargne from "./PlanEpargne";
 import FAQ from "./FAQ";
 import Bottom from "./Bottom";
 
-import "sass/main.scss";
+//import "sass/main.scss";
 
 const MainPage = () => {
 	return (
@@ -18,6 +18,7 @@ const MainPage = () => {
 					linkTo="/choix"
 					textBtn="Se préinscrire"
 					logoType="white"
+					headerFixed={true}
 				/>
 				<Accueil />
 				<Produits />

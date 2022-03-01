@@ -5,14 +5,15 @@
 	background-color: var(--subs-yellow);
 	border-radius: 500px;
 	padding: 10px 24px;
-	font-weight: 700;
+	font-weight: 600;
 	cursor: pointer;
 	transition: all 0.2s;
 	padding: 10px 24px;
-	width: 100%;
+	/* width: 100%; */
 	font-size: inherit;
 	margin: 0;
 	transition: all 0.3s ease;
+	letter-spacing: 0.6px;
 }
 
 .button3:hover {

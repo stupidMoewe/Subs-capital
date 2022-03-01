@@ -89,7 +89,7 @@ const Login = (props) => {
 			return;
 		}
 
-		fetch(baseURL + "/users/newuser", {
+		fetch(baseURL + "/api/users/newuser", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({

@@ -21,22 +21,7 @@ services:
     volumes:
       - ./backend/:/usr/src/app
       - /usr/src/app/node_modules
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:4.4-bionic
-    ports:
-      - "21017:21017"
-    networks:
-      - subs
-    volumes: 
-      - mongo-data:/data/db
 
 networks:
   subs:
     driver: bridge
-
-volumes:
-  mongo-data:
-    driver: local
