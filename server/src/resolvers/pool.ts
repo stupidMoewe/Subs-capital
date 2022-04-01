@@ -15,6 +15,8 @@ import { PoolResponse } from "../types/graph";
 @InputType()
 class PoolInput {
 	@Field()
+	poolAddress: string;
+	@Field()
 	protocolName: string;
 	@Field()
 	token0: string;
@@ -22,11 +24,14 @@ class PoolInput {
 	token1: string;
 	@Field()
 	apr: number;
+	@Field()
+	tvl: number;
 }
 
 @Resolver(Pool)
 export class PoolResolver {
 	relations = ["protocol", "timestamp"];
+
 	@Query(() => [Pool], { nullable: true })
 	async pools() {
 		return Pool.find({ relations: this.relations });
@@ -66,6 +71,16 @@ export class PoolResolver {
 				},
 			});
 			if (!currentProtocol) throw new Error();
+
+			// check if existing pool with same id
+			const existingPool = await Pool.findOne({
+				where: {
+					poolAddress: input.poolAddress,
+					protocol: currentProtocol,
+				},
+			});
+			if (existingPool) throw new Error();
+
 			const poolName = input.token0 + "-" + input.token1;
 			poolCreated = await Pool.create({
 				poolName,
@@ -73,7 +88,9 @@ export class PoolResolver {
 				token0: input.token0,
 				token1: input.token1,
 				apr: input.apr,
+				tvl: input.tvl,
 				timestamp: currentTS,
+				poolAddress: input.poolAddress,
 			}).save();
 		} catch (err) {
 			console.log(err);
@@ -87,6 +104,29 @@ export class PoolResolver {
 			};
 		}
 		return { pool: poolCreated };
+	}
+
+	@Mutation(() => Boolean)
+	async updatePool(
+		@Arg("poolAddress") poolAddress: string,
+		@Arg("protocolId") protocolId: number,
+		@Arg("weight") weight: number
+	): Promise<Boolean> {
+		try {
+			const pool = await Pool.findOne({
+				where: {
+					protocol: { id: protocolId },
+					poolAddress,
+				},
+			});
+			console.log(weight);
+			const weightParsed = Math.floor(weight * 10 ** 8);
+			pool!.weight = weightParsed;
+			await pool!.save();
+		} catch (err) {
+			return false;
+		}
+		return true;
 	}
 }
 

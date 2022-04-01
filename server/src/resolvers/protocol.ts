@@ -1,21 +1,8 @@
-import {
-	Arg, Int,
-	Mutation,
-	Query,
-	Resolver
-} from "type-graphql";
+import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
 import { Blockchain } from "../entity/Blockchain";
 import { Protocol } from "../entity/Protocol";
 import { Timestamp } from "../entity/Timestamp";
 import { ProtocolResponse } from "../types/graph";
-
-// @InputType()
-// class ProtocolInput {
-// 	@Field()
-// 	name: string;
-// 	@Field()
-// 	blockchainName: number;
-// }
 
 @Resolver(Protocol)
 export class ProtocolResolver {
@@ -34,6 +21,16 @@ export class ProtocolResolver {
 	@Query(() => Protocol)
 	async protocolById(@Arg("id", () => Int) protocolId: number) {
 		return Protocol.findOne(protocolId, { relations: this.relations });
+	}
+
+	@Query(() => Protocol)
+	async protocolLast() {
+		return Protocol.findOne({
+			relations: this.relations,
+			order: {
+				id: "DESC",
+			},
+		});
 	}
 
 	@Mutation(() => ProtocolResponse)
@@ -81,5 +78,27 @@ export class ProtocolResolver {
 			};
 		}
 		return { protocol };
+	}
+
+	@Mutation(() => Boolean)
+	async updateProtocol(
+		@Arg("protocolId") protocolId: number,
+		@Arg("risk") risk: number,
+		@Arg("apr") apr: number
+	): Promise<Boolean> {
+		try {
+			console.log(protocolId);
+			console.log(risk);
+			console.log(apr);
+			const riskParsed = Math.floor(risk);
+			const aprParsed = Math.floor(apr);
+			await Protocol.update(protocolId, {
+				risk: riskParsed,
+				apr: aprParsed,
+			});
+		} catch (err) {
+			return false;
+		}
+		return true;
 	}
 }

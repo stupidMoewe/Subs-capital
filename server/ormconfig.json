@@ -1,12 +1,8 @@
 {
-	"name": "default",
 	"type": "postgres",
-	"host": "localhost",
-	"port": 5432,
-	"username": "postgres",
-	"password": "postgres",
-	"database": "subs",
-	"synchronize": true,
+	"url": "postgresql://postgres:postgres@db:5432/subs",
+	"synchronize": false,
 	"logging": true,
+	"migrations": ["dist/migrations/*.js"],
 	"entities": ["dist/entity/*.*"]
 }

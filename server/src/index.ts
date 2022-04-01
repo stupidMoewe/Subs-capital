@@ -1,4 +1,5 @@
 import { ApolloServer } from "apollo-server-express";
+import "dotenv-safe/config";
 import cors from "cors";
 import express from "express";
 import { buildSchema } from "type-graphql";
@@ -7,12 +8,31 @@ import { BlockchainResolver } from "./resolvers/blockchain";
 import { PoolResolver } from "./resolvers/pool";
 import { ProtocolResolver } from "./resolvers/protocol";
 import { TimestampResolver } from "./resolvers/timestamp";
+// import path from "path";
 
 const main = async () => {
 	let retries = 10;
 	while (retries) {
 		try {
-			await createConnection();
+			await createConnection({
+				type: "postgres",
+				url: process.env.DATABASE_URL,
+				synchronize: false,
+				logging: true,
+				migrations: ["dist/migrations/*"],
+				entities: ["dist/entity/*.*"],
+			});
+			// 			{
+			// 	"type": "postgres",
+			// 	"host": "localhost",
+			// 	"port": 5432,
+			// 	"username": "postgres",
+			// 	"password": "postgres",
+			// 	"database": "subs2",
+			// 	"entities": ["dist/entity/*.js"],
+			// 	"migrations": ["dist/migrations/*.js"]
+			// }
+			// await conn.runMigrations();
 			break;
 		} catch (err) {
 			console.log(err);
@@ -25,12 +45,16 @@ const main = async () => {
 			});
 		}
 	}
-	//await conn.runMigrations();
+	// await conn.runMigrations();
 	const app = express();
 
 	app.use(
 		cors({
-			origin: "http://localhost:5000",
+			origin: [
+				process.env.CORS_ORIGIN_FE,
+				process.env.CORS_ORIGIN_DM,
+				"https://www.subs-capital.fr",
+			],
 			credentials: true,
 		})
 	);
@@ -50,12 +74,11 @@ const main = async () => {
 
 	apolloServer.applyMiddleware({ app, cors: false });
 
-	app.listen(4000, () => {
+	app.listen(parseInt(process.env.PORT), () => {
 		console.log("server started on localhost:4000");
 	});
 };
 
-main();
-//.catch((err) => {
-// 	console.error(err);
-// });
+main().catch((err) => {
+	console.error(err);
+});

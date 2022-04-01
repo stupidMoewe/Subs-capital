@@ -1,15 +1,16 @@
 import fetch from "node-fetch";
 import fs from "fs";
+import { calculateApr } from "../../helpers";
 
 import { ETHEREUM_PROTOCOLES } from "./ethereum-constants";
 
 import tokenList from "../../../data/farm/ethereum-tokens/tokens-list.json";
 
 export const fetchDataEthereum = async () => {
+	console.log("fetchDataEthereum");
 	ETHEREUM_PROTOCOLES.forEach(async (p) => {
-		console.log("protocole: ", p);
-		const data = await fetch(
-			`https://api.zapper.fi/v1/protocols/${p}/farms?network=ethereum&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241`
+		const data = await fetch("https://api.zapper.fi/v1/protocols/sushiswap/farms?network=ethereum&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241"
+			// `https://api.zapper.fi/v1/protocols/${p}/farms?network=ethereum&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241`
 		);
 		const response: any = await data.json();
 
@@ -17,22 +18,23 @@ export const fetchDataEthereum = async () => {
 
 		const allData: object[] = [];
 		response.map((pool) => {
-			console.log(pool);
 			const pair = pool.tokens[0];
 			if (
 				pair.category == "pool" &&
 				!pair.isBlocked &&
 				pair.tokens[0]?.symbol &&
-				pair.tokens[1]?.symbol
+				pair.tokens[1]?.symbol &&
+				pair.volume > 5000000
 			) {
 				const token0: string = pair.tokens[0].symbol;
 				const token1: string = pair.tokens[1].symbol;
 				const object = new Object({
-					id: pair.address,
+					poolAddress: pair.address,
 					name: pair.symbol,
-					apr: (pair.fee * pair.volume * 365) / pair.liquidity,
+					apr: calculateApr(pair.fee, pair.volume, pair.liquidity),
 					token0,
 					token1,
+					tvl: Math.round(pair.volume),
 				});
 
 				if (!listOfTokens.includes(token0)) {
@@ -47,6 +49,7 @@ export const fetchDataEthereum = async () => {
 				allData.push(object);
 			}
 		});
+		console.log("Data fetched");
 
 		fs.writeFile(
 			"./data/farm/ethereum-tokens/tokens-list.json",
@@ -62,5 +65,6 @@ export const fetchDataEthereum = async () => {
 				console.log(err);
 			}
 		);
+		console.log("Data Updated");
 	});
 };

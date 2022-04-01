@@ -28,7 +28,7 @@
 		"./src/*.ts",
 		"./src/**/*.tsx",
 		"./src/**/*.ts",
-		"./cronjob.ts",
+		"index.ts",
 		"index.ts"
 	]
 }

@@ -11,8 +11,10 @@ const Choices = React.lazy(() => import("../Components/Login/Choices"));
 const Confirmation = React.lazy(() =>
 	import("../Components/Login/Confirmation")
 );
-const Code = React.lazy(() => import("../Components/Portfolio/Code"));
 const Portfolio = React.lazy(() => import("../Components/Portfolio/Portfolio"));
+const Portfolio2 = React.lazy(() =>
+	import("../Components/Portfolio/Portfolio2")
+);
 const ErrorPage = React.lazy(() => import("../Components/MainPage/ErrorPage"));
 
 const App = () => {
@@ -30,6 +32,11 @@ const App = () => {
 						<Route path="/spinner" component={Spinner} exact />
 						<Route path="/choix" component={Choices} exact />
 						<Route path="/portfolio" component={Portfolio} exact />
+						<Route
+							path="/portfolio-2"
+							component={Portfolio2}
+							exact
+						/>
 						{/* <Route path="/portfolio" component={Code} /> */}
 						<Route path="/" component={MainPage} exact />
 						<Route path="/" component={ErrorPage} />

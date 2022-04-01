@@ -1,11 +1,9 @@
+import cors from "cors";
 import express from "express";
-// import populateDataAave from "./populate/aave";
-let { PythonShell } = require("python-shell");
 import path from "path";
 import farmWeights from "./data/farm/ethereum/optimalWeights.json";
-import { getTokenSourceMapRange } from "typescript";
-import { transformDailyDataToCsv } from "./src/transformData";
-import cors from "cors";
+// import populateDataAave from "./populate/aave";
+let { PythonShell } = require("python-shell");
 
 const runPythonFile = async () => {
 	const options = {
@@ -38,7 +36,7 @@ const main = async () => {
 	app.use(cors());
 
 	//transformDailyDataToCsv();
-	//runPythonFile();
+	runPythonFile();
 
 	app.get("/farm/eth/data", async (_, res) => {
 		res.send(farmWeights);

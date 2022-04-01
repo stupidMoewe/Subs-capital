@@ -14,10 +14,8 @@ COPY ./package-lock.json ./
 RUN npm install
 
 COPY . .
-COPY .env.production .env
 
 RUN npm run build
 
-EXPOSE 4000
+EXPOSE 1234
 CMD [ "node", "dist/index.js" ]
-USER node

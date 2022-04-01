@@ -10,7 +10,6 @@ services:
     volumes:
       - ./frontend/:/usr/src/app
       - /usr/src/app/node_modules
-
   api-server:
     image: api-server
     env_file: ./backend/config/dev.env
@@ -21,6 +20,30 @@ services:
     volumes:
       - ./backend/:/usr/src/app
       - /usr/src/app/node_modules
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: subs
+    volumes:
+      - ./server/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - subs
+  server:
+    build: ./server
+    depends_on:
+      - db
+    links:
+      - db
+    env_file:
+      - ./server/.env
+    ports:
+      - "4000:4000"
+    networks:
+      - subs
 
 networks:
   subs:

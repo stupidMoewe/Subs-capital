@@ -1,18 +1,53 @@
 import Bottom from "Components/MainPage/Bottom";
 import Header from "Components/MainPage/Header";
 import Button3 from "HOC/button3";
-import React, { Component } from "react";
+import React, { useEffect, useState, useMemo, Component } from "react";
 import { Bar, Doughnut } from "react-chartjs-2";
-import Box2 from "../../Components/Box/Box2";
-import BoxesContainer from "../../Components/Box/BoxesContainer";
+import Box2 from "../Box/Box2";
+import BoxesContainer from "../Box/BoxesContainer";
 import courbureBlue from "../../images/Courbure-bleue.png";
 import courbureJaune from "../../images/Courbure-jaune.png";
-import nextIcon from "../../images/Idea_Monochromatic.svg";
+import nextIcon from "../../images/Fortnite_Outline.png";
 import instaImage from "../../images/Instagram_Monochromatic.png";
 import twitterImage from "../../images/Twitter_Monochromatic.png";
 
+const url = `http://localhost:4000/graphql`; //https://www.subs-capital.fr/graphql
+
+const getProtocol = `query{
+	protocolLast{
+		id
+   		name
+    	risk
+    	apr
+    	pools{
+      		poolName
+      		weight
+      		apr
+      		tvl
+    	}
+  	}
+}`;
+
+const callGraphQL = async (query, variables = {}) => {
+	const data = await fetch(url, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+		},
+		body: JSON.stringify({
+			query,
+			variables,
+		}),
+	})
+		.then((r) => r.json())
+		.then((data) => {
+			return data;
+		});
+	return data;
+};
+
 const calculWeightsTokens = (pools) => {
-	console.log(pools);
 	const tokensWeights = [];
 	pools.map((pool) => {
 		if (pool.weight != 0) {
@@ -41,7 +76,6 @@ const calculWeightsTokens = (pools) => {
 				});
 			}
 		}
-		return;
 	});
 	const tokensName = [];
 	const tokensData = [];
@@ -52,68 +86,35 @@ const calculWeightsTokens = (pools) => {
 	return [tokensName, tokensData];
 };
 
-class Portfolio extends Component {
+class Portfolio2 extends Component {
 	state = {
 		pools: [],
 		tokensData: [],
 	};
 	componentWillMount() {
-		// callGraphQL(getProtocol)
-		// 	.then((res) => {
-		// 		this.setState({ pools: res.data.protocolLast.pools });
-		// 	})
-		// 	.then(() => {
-		this.setState(
-			{
-				pools: [
-					{
-						poolName: "ETH-USDT",
-						weight: 0.20340636244242233 * 10 ** 8,
-					},
-					{
-						poolName: "USDC-ETH",
-						weight: 0.20907223950456166 * 10 ** 8,
-					},
-					{
-						poolName: "DAI-ETH",
-						weight: 0.16820029007424947 * 10 ** 8,
-					},
-					// {
-					// 	poolName: "YFI-ETH",
-					// 	weight: 0,
-					// },
-					// {
-					// 	poolName: "KP3R-ETH",
-					// 	weight: 0,
-					// },
-					{
-						poolName: "LDO-ETH",
-						weight: 0.08170946472696101 * 10 ** 8,
-					},
-					{
-						poolName: "SPELL-ETH",
-						weight: 0.29448179932352603 * 10 ** 8,
-					},
-					// {
-					// 	poolName: "CVX-ETH",
-					// 	weight: 0,
-					// },
-					{
-						poolName: "ETH-IMX",
-						weight: 0.04312984392827954 * 10 ** 8,
-					},
-				],
-			},
-			() => {
+		callGraphQL(getProtocol)
+			.then((res) => {
+				this.setState({ pools: res.data.protocolLast.pools });
+			})
+			.then(() => {
 				this.setState({
 					tokensData: calculWeightsTokens(this.state.pools),
 				});
-			}
-		);
-
-		// });
+			});
 	}
 	render() {
+		//console.log("dataFarmEth: ", dataFarmEthPools, hasError);
+		// const dataFarmEthPools = [];
+		// const [loading, setLoading] = useState(true);
+		// // const [dataFarmEthPools, setDataFarmEth] = useState([]);
+		// //const [tokensWeights, setTokensWeights] = useState([]);
+		// useEffect(() => {
+		// 	// 	if (dataFarmEthPools)
+		// 	// 		setTokensWeights(calculWeightsTokens(dataFarmEthPools));
+		// }, [loading]);
+		// setLoading(false);
+		//const tokensWeights = calculWeightsTokens(dataFarmEthPools);
+		//console.log("tokensWeights: ", tokensWeights);
 		const protocols = {
 			sushiswap: { labels: [], data: [] },
 		};
@@ -318,12 +319,12 @@ class Portfolio extends Component {
 							<Box2 flex={3} ftColor={"blue"}>
 								<div className="subBox" style={{ zIndex: 1 }}>
 									<h3>Exposition Max</h3>
-									<span>50%</span>
+									<span>38%</span>
 									<br />
 									<div>
 										<small>
 											Exposition maximale de notre
-											portefolio (ETH)
+											portefolio
 										</small>
 									</div>
 								</div>
@@ -462,4 +463,4 @@ class Portfolio extends Component {
 	}
 }
 
-export default Portfolio;
+export default Portfolio2;

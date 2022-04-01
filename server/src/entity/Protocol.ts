@@ -7,7 +7,7 @@ import {
 	ManyToOne,
 	OneToMany,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
 } from "typeorm";
 import { Blockchain } from "./Blockchain";
 import { Pool } from "./Pool";
@@ -31,6 +31,14 @@ export class Protocol extends BaseEntity {
 	@Field()
 	@Column()
 	timestampId!: number;
+
+	@Field({ nullable: true })
+	@Column({ nullable: true })
+	risk: number;
+
+	@Field({ nullable: true })
+	@Column({ nullable: true })
+	apr: number;
 
 	@Field(() => String)
 	@CreateDateColumn()

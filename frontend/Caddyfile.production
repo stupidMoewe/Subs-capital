@@ -6,4 +6,5 @@ www.subs-capital.fr:443 {
         try_files {path} {path}/ /index.html
         file_server
     }
+    reverse_proxy /* root_server:4000 
 }

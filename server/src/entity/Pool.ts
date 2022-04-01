@@ -20,6 +20,10 @@ export class Pool extends BaseEntity {
 
 	@Field()
 	@Column()
+	poolAddress!: string;
+
+	@Field()
+	@Column()
 	poolName!: string;
 
 	// @Field()
@@ -41,6 +45,10 @@ export class Pool extends BaseEntity {
 	@Field()
 	@Column({ default: 0 })
 	apr: number;
+
+	@Field()
+	@Column({ default: 0 })
+	tvl: number;
 
 	@Field()
 	@Column({ default: 0 })

@@ -19,6 +19,32 @@ services:
       - "5000:5000"
     networks:
       - subs
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: subs
+    volumes:
+      - ./server/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - subs
+  server:
+    build: ./server 
+    depends_on:
+      - db
+    links:
+      - db
+    env_file:
+      - ./server/.env
+    expose:
+      - "4000"
+    ports:
+      - "4000:4000"
+    networks:
+      - subs
 networks:
   subs:
     driver: bridge
