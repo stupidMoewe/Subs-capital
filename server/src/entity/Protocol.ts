@@ -36,9 +36,13 @@ export class Protocol extends BaseEntity {
 	@Column({ nullable: true })
 	risk: number;
 
-	@Field({ nullable: true })
-	@Column({ nullable: true })
+	@Field()
+	@Column({ default: 0 })
 	apr: number;
+
+	@Field()
+	@Column({ default: 0 })
+	weight: number;
 
 	@Field(() => String)
 	@CreateDateColumn()

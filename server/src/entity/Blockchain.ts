@@ -24,6 +24,18 @@ export class Blockchain extends BaseEntity {
 	@Column()
 	name!: string;
 
+	@Field()
+	@Column({ default: 0 })
+	apr: number;
+
+	@Field({ nullable: true })
+	@Column({ nullable: true })
+	risk: number;
+
+	@Field()
+	@Column({ default: 0 })
+	weight: number;
+
 	@Field(() => String)
 	@CreateDateColumn()
 	createdAt: Date;

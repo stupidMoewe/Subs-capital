@@ -66,18 +66,30 @@ class Portfolio extends Component {
 		this.setState(
 			{
 				pools: [
-					{
-						poolName: "ETH-USDT",
-						weight: 0.20340636244242233 * 10 ** 8,
-					},
+					// {
+					// 	poolName: "ETH-USDT",
+					// 	weight: 0.20340636244242233 * 10 ** 8,
+					// },
 					{
 						poolName: "USDC-ETH",
-						weight: 0.20907223950456166 * 10 ** 8,
+						weight: 0.3684716463867616 * 10 ** 8,
 					},
 					{
-						poolName: "DAI-ETH",
-						weight: 0.16820029007424947 * 10 ** 8,
+						poolName: "SUSHI-ETH",
+						weight: 0.22411077293389622 * 10 ** 8,
 					},
+					{
+						poolName: "AAVE-ETH",
+						weight: 0.09365944472854694 * 10 ** 8,
+					},
+					// {
+					// 	poolName: "ETH-USDT",
+					// 	weight: 0.31375813595079516 * 10 ** 8,
+					// },
+					// {
+					// 	poolName: "DAI-ETH",
+					// 	weight: 0.16820029007424947 * 10 ** 8,
+					// },
 					// {
 					// 	poolName: "YFI-ETH",
 					// 	weight: 0,
@@ -88,20 +100,20 @@ class Portfolio extends Component {
 					// },
 					{
 						poolName: "LDO-ETH",
-						weight: 0.08170946472696101 * 10 ** 8,
+						weight: 0.31375813595079516 * 10 ** 8,
 					},
-					{
-						poolName: "SPELL-ETH",
-						weight: 0.29448179932352603 * 10 ** 8,
-					},
+					// {
+					// 	poolName: "SPELL-ETH",
+					// 	weight: 0.29448179932352603 * 10 ** 8,
+					// },
 					// {
 					// 	poolName: "CVX-ETH",
 					// 	weight: 0,
 					// },
-					{
-						poolName: "ETH-IMX",
-						weight: 0.04312984392827954 * 10 ** 8,
-					},
+					// {
+					// 	poolName: "ETH-IMX",
+					// 	weight: 0.04312984392827954 * 10 ** 8,
+					// },
 				],
 			},
 			() => {
@@ -304,7 +316,7 @@ class Portfolio extends Component {
 							<Box2 flex={3} ftColor={"yellow"}>
 								<div className="subBox" style={{ zIndex: 1 }}>
 									<h3>Volatilité</h3>
-									<span title="Volatilité faible">2.2%</span>
+									<span title="Volatilité faible">3.4%</span>
 									<div>
 										<small>
 											Faible volatilité (entre 0% et 10%)

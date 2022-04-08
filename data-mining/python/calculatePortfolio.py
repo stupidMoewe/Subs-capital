@@ -26,8 +26,8 @@ tokens = sys.argv[4:5][0].split(",")
 ############
 
 # 1. RECOLT DATA TOKENS 
-start = datetime.datetime(2022, 3, 3)
-end = datetime.datetime(2022, 3, 31)
+end_date = datetime.datetime.today()
+start_date = datetime.datetime.today() - datetime.timedelta(days=28)
 
 # tokens 
 length = len(tokens)
@@ -41,8 +41,8 @@ for i, val in enumerate(tokens):
     try:
         pair_str = val+'-USD'
         token_name = val
-        val = pdr.get_data_yahoo(pair_str, start, end)['Close']
-        if(len(val) != 28):
+        val = pdr.get_data_yahoo(pair_str, start_date, end_date)['Close']
+        if(len(val) != 29):
             undesired_tokens.append(token_name)
             continue
         appended_data.append(val)

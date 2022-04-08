@@ -24,10 +24,12 @@
 		"baseUrl": "."
 	},
 	"exclude": ["node_modules"],
+	"ignore": ["./data/**/**/*.json"],
 	"include": [
 		"./src/*.ts",
 		"./src/**/*.tsx",
 		"./src/**/*.ts",
+		// "./data/**/**/*.json",
 		"index.ts",
 		"index.ts"
 	]

@@ -34,6 +34,20 @@ export class BlockchainResolver {
 		return Blockchain.findOne({ name }, { relations: this.relations });
 	}
 
+	@Query(() => Blockchain)
+	async lastBCByBCName(@Arg("blockchainName") blockchainName: string) {
+		// const lastTS = await Timestamp.findOne({ order: { id: "DESC" } });
+		return Blockchain.findOne({
+			relations: this.relations,
+			order: {
+				id: "DESC",
+			},
+			where: {
+				name: blockchainName,
+			},
+		});
+	}
+
 	@Mutation(() => BlockchainResponse)
 	async addBlockchain(
 		@Arg("name") name: string
@@ -61,5 +75,51 @@ export class BlockchainResolver {
 			};
 		}
 		return { blockchain };
+	}
+
+	@Mutation(() => Boolean)
+	async updateBlockchain(
+		@Arg("blockchainName") blockchainName: string,
+		@Arg("apr") apr: number,
+		@Arg("risk") risk: number
+	): Promise<Boolean> {
+		try {
+			const aprParsed = Math.floor(apr);
+			const riskParsed = Math.floor(risk );
+
+			const lastTS = await Timestamp.findOne({ order: { id: "DESC" } });
+
+			await Blockchain.update(
+				{ name: blockchainName, timestamp: { id: lastTS?.id } },
+				{
+					apr: aprParsed,
+					risk: riskParsed,
+				}
+			);
+		} catch (err) {
+			console.log("error update protocol: ", err);
+			return false;
+		}
+		return true;
+	}
+
+	@Mutation(() => Boolean)
+	async updateWeightBlockchain(
+		@Arg("blockchainName") blockchainName: string,
+		@Arg("weight") weight: number
+	): Promise<Boolean> {
+		try {
+			const weightParsed = Math.floor(weight);
+			await Blockchain.update(
+				{ name: blockchainName },
+				{
+					weight: weightParsed,
+				}
+			);
+		} catch (err) {
+			console.log("error update weight blockchain: ", err);
+			return false;
+		}
+		return true;
 	}
 }

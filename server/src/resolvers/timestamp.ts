@@ -11,6 +11,14 @@ export class TimestampResolver {
 		return Timestamp.findOne(timestampId, { relations: this.relations });
 	}
 
+	@Query(() => Timestamp, { nullable: true })
+	async lastTimestamp() {
+		return Timestamp.findOne({
+			relations: this.relations,
+			order: { id: "DESC" },
+		});
+	}
+
 	@Query(() => [Timestamp], { nullable: true })
 	async timestamps() {
 		return Timestamp.find({
@@ -46,5 +54,26 @@ export class TimestampResolver {
 			};
 		}
 		return { timestamp };
+	}
+
+	@Mutation(() => Boolean)
+	async updateTimestamp(
+		@Arg("risk") risk: number,
+		@Arg("apr") apr: number
+	): Promise<Boolean> {
+		const riskParsed = Math.floor(risk); const aprParsed = Math.floor(apr);
+		let lastTS;
+		try {
+			lastTS = await Timestamp.findOne({ order: { id: "DESC" } });
+			if (lastTS) {
+				lastTS.apr = aprParsed;
+				lastTS.risk = riskParsed;
+			}
+			lastTS?.save();
+		} catch (err) {
+			console.log("error update protocol: ", err);
+			return false;
+		}
+		return true;
 	}
 }

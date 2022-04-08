@@ -7,6 +7,7 @@ import {
 	Query,
 	Resolver,
 } from "type-graphql";
+import { Blockchain } from "../entity/Blockchain";
 import { Pool } from "../entity/Pool";
 import { Protocol } from "../entity/Protocol";
 import { Timestamp } from "../entity/Timestamp";
@@ -26,6 +27,8 @@ class PoolInput {
 	apr: number;
 	@Field()
 	tvl: number;
+	@Field()
+	weight: number;
 }
 
 @Resolver(Pool)
@@ -34,7 +37,7 @@ export class PoolResolver {
 
 	@Query(() => [Pool], { nullable: true })
 	async pools() {
-		return Pool.find({ relations: this.relations });
+		return Pool.find({ relations: this.relations, order: { id: "DESC" } });
 	}
 
 	@Query(() => Pool, { nullable: true })
@@ -42,8 +45,8 @@ export class PoolResolver {
 		return Pool.findOne(id);
 	}
 
-	@Query(() => Pool, { nullable: true })
-	async poolByProtocolId(@Arg("protocolId", () => Int) protocolId: number) {
+	@Query(() => [Pool], { nullable: true })
+	async poolsByProtocolId(@Arg("protocolId") protocolId: number) {
 		return Pool.find({ where: { protocol: { id: protocolId } } });
 	}
 
@@ -63,11 +66,25 @@ export class PoolResolver {
 				order: { id: "DESC" },
 			});
 
+			const currentBC = await Blockchain.findOne({
+				order: { id: "DESC" },
+			});
+
+			// const currentBC = await Blockchain.findOne({
+			// 	where: {
+			// 		timestamp: { id: currentTS?.id },
+			// 		name: input?.blockchainName,
+			// 	},
+			// });
+
+			console.log(input, currentBC);
+
 			// check if existing protocol => we need to have one
 			const currentProtocol = await Protocol.findOne({
 				where: {
 					timestamp: { id: currentTS?.id },
 					name: input.protocolName,
+					blockchain: { id: currentBC?.id },
 				},
 			});
 			if (!currentProtocol) throw new Error();
@@ -79,7 +96,7 @@ export class PoolResolver {
 					protocol: currentProtocol,
 				},
 			});
-			if (existingPool) throw new Error();
+			if (existingPool) throw new Error("Duplicated Pool");
 
 			const poolName = input.token0 + "-" + input.token1;
 			poolCreated = await Pool.create({
@@ -88,6 +105,7 @@ export class PoolResolver {
 				token0: input.token0,
 				token1: input.token1,
 				apr: input.apr,
+				weight: input.weight,
 				tvl: input.tvl,
 				timestamp: currentTS,
 				poolAddress: input.poolAddress,
@@ -108,8 +126,8 @@ export class PoolResolver {
 
 	@Mutation(() => Boolean)
 	async updatePool(
-		@Arg("poolAddress") poolAddress: string,
 		@Arg("protocolId") protocolId: number,
+		@Arg("poolAddress") poolAddress: string,
 		@Arg("weight") weight: number
 	): Promise<Boolean> {
 		try {
@@ -119,22 +137,18 @@ export class PoolResolver {
 					poolAddress,
 				},
 			});
-			console.log(weight);
-			const weightParsed = Math.floor(weight * 10 ** 8);
+			console.log(pool, weight);
+			let weightParsed = Math.floor(weight * 10 ** 8);
+			// if (weightParsed == 100000000) {
+			// 	console.log("inside special case weighrt = 1");
+			// 	weightParsed = 99999999;
+			// }
 			pool!.weight = weightParsed;
 			await pool!.save();
 		} catch (err) {
+			console.log("error update pool: ", err);
 			return false;
 		}
 		return true;
 	}
 }
-
-/* 
-Pool Structure
-
-BC
-    Protocole
-        Pool => chaque pool sera representee ts les jours avec current apr
-
-*/

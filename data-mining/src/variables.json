@@ -1,4 +1,0 @@
-{
-	"blockchains": ["ethereum"],
-	"protocols": [{ "ethereum": ["sushiswap"] }]
-}

@@ -20,6 +20,14 @@ export class Timestamp extends BaseEntity {
 	@PrimaryGeneratedColumn("increment")
 	id!: number;
 
+	@Field({ nullable: true })
+	@Column({ nullable: true })
+	risk: number;
+
+	@Field()
+	@Column({ default: 0 })
+	apr: number;
+
 	@Field(() => String)
 	@Column({ type: "timestamptz" })
 	beginTime!: Date;
